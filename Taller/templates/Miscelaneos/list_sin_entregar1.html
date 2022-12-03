@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<p id="destino"></p> 
+  
+<div class="data-table-area mg-b-15">
+                <div class="container-fluid">
+                    <div class="row">
+                      <form action = "" method="post">
+                          {%csrf_token%} 
+                        <div class="col-lg-12">
+                            <div class="sparkline13-list shadow-reset">
+                                <div class="sparkline13-hd" style="background: -webkit-linear-gradient(top, #FFFFFF, #006699); background: -moz-linear-gradient(top, #FFFFFF, #006699);">
+                                    <div class="main-sparkline13-hd">
+                                        <h1 align="center" style="text-shadow: rgb(0,0,150) 3px 3px 5px;"><b>Listado <span class="table-project-n"> de Órdenes</span> sin Entregar</b></h1>
+                                        <div class="sparkline13-outline-icon">
+                                            <span class="sparkline13-collapse-link"><i class="fa fa-chevron-up"></i></span>
+                                            <span><i class="fa fa-wrench"></i></span>
+                                            <span class="sparkline13-collapse-close"><i class="fa fa-times"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="sparkline13-graph" style="background: -webkit-linear-gradient(top, #FFFFFF, #006699); background: -moz-linear-gradient(top, #FFFFFF, #0066FF);">
+                                    <div class="static-table-list">
+                                        <table id="example" class="table table-bordered table-striped">      
+                                            <thead>
+                                                <tr>
+                                                    <th>No Orden</th>
+                                                    <th>Servicio</th>
+                                                    <th>Fecha creación</th>
+                                                    <th>Ordena</th>
+                                                    <th>Modelo</th>
+                                                    <th>Tecnología</th>
+                                                    <th>Serie</th>
+                                                    <th>Estado</th>
+                                                    <th>Entregar Orden</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <td> 
+                                                        
+                                                        <button type="button" data-id={{model.id}} class="btn btn-warning" style="-moz-box-shadow: rgb(150,150,150) 10px 10px 20px;-webkit-box-shadow: rgb(150,150,150) 10px 10px 20px;box-shadow: rgb(150,150,150) 10px 10px 20px; background: -webkit-linear-gradient(top, #FFFFFF, #FF2A2A); background: -moz-linear-gradient(top, #FFFFFF, #FF2A2A);"><i class="fa fa-edit" ></i></button>
+                                                    </td>  
+                                                </tr>
+                                                {%endfor%}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+          </div>
+    </div>
+
+
+    
+
+            <!-- Static Table End -->
+     
+{% endblock %}
+
+{%block jscontent%}
+
+
+<script>  
+    $("button").click(function(event){
+      event.preventDefault();
+      var elemento=$(this).attr('data-id');     
+       update(elemento);
+       
+           
+   });
+    function update(id_next) {
+      datos = {'id': id_next};
+            $.ajax({
+                url: "/pentregar/",
+                type: "POST",
+                dataType: "json",
+              data: {
+                    data: JSON.stringify(datos)
+                },
+                beforeSend: function (xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                },
+                success: function (result) {
+                    if (result) {
+                        $("#destino").append('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Se ha confirmado la entrega de la orden al taller.</strong></div>');
+                        $("#destino").fadeOut(1000, function(){
+                            $("#destino").fadeIn(1000, function(){
+                                $("#destino").fadeOut(1000, function(){
+                                    $("#destino").fadeIn(1000, function(){
+                                        $("#destino").fadeOut(1000);
+                                    });
+                                });
+                            });
+                        });
+                        make_box(result.data);
+                    }
+                },
+            });
+        };
+</script>
+
+{%endblock%}

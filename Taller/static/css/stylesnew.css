@@ -1,0 +1,17 @@
+.pagenew-div{
+    border-radius: 10px;
+    background-color: #d8e6f0;
+    box-shadow: 6px 6px 10px #cbced1, -6px -6px 10px #fff;
+  }
+  
+  .forms-input{
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: inset 5px 5px 5px #cbced1;
+  }
+
+  .pageformat{
+    background-color:rgb(220, 237, 228);
+    border-radius: 10px;
+    box-shadow: 3px 3px 6px #cbced1, -3px -3px 6px #fff;
+  }

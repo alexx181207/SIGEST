@@ -1,0 +1,328 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>Orden de Trabajo</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+
+<style type="text/css">
+<!--
+.Estilo1 {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+.Estilo5 {
+	font-family: "Times New Roman", Times, serif;
+	font-weight: bold;
+}
+.Estilo6 {font-size: 14px}
+.Estilo7 {font-family: "Times New Roman", Times, serif}
+.Estilo8 {font-family: "Times New Roman", Times, serif; font-size: 16px; }
+.Estilo23 {font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: bold; font-size: 16px; }
+.Estilo20 {font-size: 14px; font-family: "Times New Roman", Times, serif; }
+.Estilo25 {font-style: italic; font-weight: bold; font-family: "Times New Roman", Times, serif;}
+.Estilo10 {font-size: 16px; font-weight: bold; font-style: italic;}
+.Estilo17 {font-size: 14}
+.Estilo28 {font-size: 14px; font-weight: bold; font-family: "Times New Roman", Times, serif; }
+.Estilo29 {font-size: 14; font-family: "Times New Roman", Times, serif; }
+.Estilo30 {font-size: 13px; font-family: "Times New Roman", Times, serif; }
+.Estilo13 {
+	font-family: "Times New Roman", Times, serif;
+	font-style: italic;
+	font-size: 14px;
+}
+-->
+</style>
+</head>
+
+<body >
+<table width="652" height="52" border="0" align="left">
+  <tr>
+    <td width="500"  bordercolor="#000000"><div align="left"><span class="Estilo1"><img src='data:image/png;base64,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'></span> </div></td>
+
+    <td width="130" height="21" bordercolor="#000000"><div align="left" class="Estilo5">
+      <div align="left"><span class="Estilo6">FOLIO:  {{model.No_orden}}</span></div>
+    </div></td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+
+
+<table width="652" height="52" border="2" align="left">
+  <tr>
+    <td width="527" rowspan="2" bordercolor="#000000"><div align="center"><span class="Estilo1">CERTIFICADO DE SERVICIO DE GARANTIA Y POSTVENTA</span> </div></td>
+    <td width="31" height="21" bordercolor="#000000"><div align="center" class="Estilo5">
+      <div align="center"><span class="Estilo6">D</span></div>
+    </div></td>
+    <td width="33" bordercolor="#000000"><div align="center" class="Estilo5">
+      <div align="center"><span class="Estilo6">M</span></div>
+    </div></td>
+    <td width="33" bordercolor="#000000"><div align="center" class="Estilo5">
+      <div align="center"><span class="Estilo6">A</span></div>
+    </div></td>
+  </tr>
+  <tr>
+    <td height="23" bordercolor="#000000"><div align="center"><span class="Estilo20">{{model.fecha_creacion.day}}</span></div></td>
+    <td bordercolor="#000000"><div align="center"><span class="Estilo20">{{model.fecha_creacion.month}}</span></div></td>
+    <td bordercolor="#000000"><div align="center"><span class="Estilo20">{{model.fecha_creacion.year}}</span></div></td>
+  </tr>
+</table>
+ <p>&nbsp;</p>
+
+ <table width="652" border="2" cellspacing="1" bordercolor="#000000">
+   <tr>
+     <td width="158"><span class="Estilo8">Taller de Reparaciones: </span></td>
+     <td width="481">_____________________{{model.centro.nombre}}_____________________________</td>
+   </tr>
+ </table>
+ <table width="642" border="1" cellspacing="1">
+   <tr>
+     <th scope="row"><div align="left" bgcolor="#CCCCCC"><span class="Estilo23">Recepción del Equipo</span></div></th>
+   </tr>
+ </table>
+ <table width="652" height="169" border="2" cellspacing="0" bordercolor="#000000">
+   <tr>
+     <td height="23" colspan="11" bordercolor="#000000">&nbsp;</td>
+     <td colspan="5" bordercolor="#000000"><div align="center"><span class="Estilo20">C. Identidad</span></div></td>
+     <td colspan="5" bordercolor="#000000"><div align="center"><span class="Estilo20">Forma de Pago</span></div></td>
+     <td colspan="6" bordercolor="#000000"><div align="center" class="Estilo20">
+         <div align="center">Ref. Doc. Compra</div>
+     </div></td>
+   </tr>
+   <tr>
+     <td height="23" colspan="3" bordercolor="#000000"><span class="Estilo20">Cliente</span></td>
+     <td colspan="8" bordercolor="#000000"><div align="center"><span class="Estilo20">{{model.nombre_cliente_entrega}}</span></div></td>
+     <td colspan="5"  bordercolor="#000000"><div align="center"><span class="Estilo20">{{model.ci_cliente_entrega}}</span></div></td>
+     <td colspan="5" bordercolor="#000000"><span class="Estilo20"></span></td>
+     <td colspan="2" bordercolor="#000000"><span class="Estilo20">Folio</span></td>
+     <td width="138" colspan="4" bordercolor="#000000">{%if model.folio_venta is not None%}{{model.folio_venta}}{%endif%}</td>
+   </tr>
+   <tr>
+     <td height="23" colspan="3" bordercolor="#000000"><span class="Estilo20">Dirección</span></td>
+     <td colspan="8" bordercolor="#000000"><div align="center"><span class="Estilo20">{{model.direccion_cliente_entrega}}</span></div></td>
+     <td colspan="5"  bordercolor="#000000"><div align="center"><span class="Estilo20"></span></div></td>
+     <td colspan="5" bordercolor="#000000"><span class="Estilo20"></span></td>
+     <td colspan="2" bordercolor="#000000"><span class="Estilo20">Fecha</span></td>
+     <td colspan="4" bordercolor="#000000"><div align="center"><span class="Estilo20">
+     {%if model.fecha_venta is not None%}{{model.fecha_venta.day}}/{{model.fecha_venta.month}}/{{model.fecha_venta.year}}{%endif%}</span></div></td>
+   </tr>
+   <tr>
+     <td height="23" colspan="27" ><div align="left" class="Estilo23"> Descripción del Equipo a Reparar </div></td>
+   </tr>
+   <tr>
+     <td height="20" colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">Código</div></td>
+     <td colspan="4" bordercolor="#000000"><div align="center" class="Estilo20">Equipo</div></td>
+     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">Marca/Modelo</div></td>
+     <td colspan="5" bordercolor="#000000"><div align="center" class="Estilo20">No. Serie </div></td>
+     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">Garantía</div></td>
+     <td colspan="9" bordercolor="#000000"><div align="center" class="Estilo20">Vencimiento de la Garantía </div></td>
+   </tr>
+   <tr>
+     <td height="23" colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">{{model.modelo.codigo_sap}}</div></td>
+     <td colspan="4" bordercolor="#000000"><div align="center" class="Estilo20">{{model.modelo.descripcion}}</div></td>
+     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">{{model.modelo.nombre}}</div></td>
+     <td colspan="5" bordercolor="#000000"><div align="center" class="Estilo20">{{model.serie}}</div></td>
+     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">{{model.garantia}}</div></td>
+     <td colspan="9" bordercolor="#000000"><div align="center" class="Estilo20">{%if model.fecha_vencimiento_garantia is not None%}{{model.fecha_vencimiento_garantia.day}}/{{model.fecha_vencimiento_garantia.month}}/{{model.fecha_vencimiento_garantia.year}}{%endif%}</div></td>
+   </tr>
+   <tr>
+     <td height="35" colspan="3" bordercolor="#000000" class="Estilo25"><u>Observaciones:</u></td>
+     <td colspan="24" bordercolor="#000000"><div align="left" class="Estilo20">{%for defecto in model.defecto.all%}{{defecto.nombre}}, {%endfor%}  {{model.observaciones}}</div></td>
+   </tr>
+ </table>
+ <table width="642" border="1" cellspacing="1">
+   <tr>
+     <th scope="row"><div bgcolor="#CCCCCC" align="left"><span class="Estilo23">Orden de Trabajo (para uso del técnico de reparaciones)</span></div></th>
+   </tr>
+ </table>
+ <table width="652" height="388" border="2" cellspacing="0" bordercolor="#000000">
+   <tr>
+     <td colspan="3" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Código</h4></td>
+     <td colspan="11" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Tipo de Mano de Obra </h4></td>
+     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Precio</h4></td>
+     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Importe</h4></td>
+     <td width="40" height="23" bordercolor="#000000"><div align="center">___</div></td>
+     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUC</span></td>
+   </tr>
+   <tr>
+     <td height="23" bordercolor="#000000"><div align="center">___</div></td>
+     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUP</span></td>
+   </tr>
+   <tr>
+     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+     <td colspan="11" bordercolor="#000000">&nbsp;</td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+     <td colspan="9" bordercolor="#000000">&nbsp;</td>
+   </tr>
+   <tr>
+     <td height="23" colspan="27" bgcolor="#CCCCCC"><span class="Estilo23">Relación de piezas y/o refacciones utilizadas</span></td>
+   </tr>
+   <tr>
+     <td colspan="3" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Código</h4></td>
+     <td colspan="11" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Tipo de Mano de Obra </h4></td>
+     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Precio</h4></td>
+     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Importe</h4></td>
+     <td height="25" bordercolor="#000000"><div align="center">___</div></td>
+     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUC</span></td>
+   </tr>
+   <tr>
+     <td height="23" bordercolor="#000000"><div align="center">___</div></td>
+     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUP</span></td>
+   </tr>
+   <tr>
+     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+     <td colspan="11" bordercolor="#000000">&nbsp;</td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+     <td colspan="5" bordercolor="#000000">&nbsp;</td>
+   </tr>
+   <tr>
+     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+     <td colspan="11" bordercolor="#000000">&nbsp;</td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+     <td colspan="5" bordercolor="#000000">&nbsp;</td>
+   </tr>
+   <tr>
+     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+     <td colspan="11" bordercolor="#000000">&nbsp;</td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+     <td colspan="5" bordercolor="#000000">&nbsp;</td>
+   </tr>
+   <tr>
+     <td height="23" colspan="17" bordercolor="#000000"><span class="Estilo30">La reparación de equipos en garantía, es libre de costo para el cliente</span></td>
+     <td colspan="5" bordercolor="#000000"><span class="Estilo30">Importe T. </span></td>
+     <td colspan="5" bordercolor="#000000">&nbsp;</td>
+   </tr>
+   <tr>
+     <td height="21" colspan="27" bordercolor="#000000" class="Estilo10"><u><span class="Estilo20">Dictamen Técnico del Equipo:</span></u></td>
+   </tr>
+   <tr>
+     <td height="36" colspan="9" bordercolor="#000000"><span class="Estilo20">El equipo a reparar se dictamina como: </span></td>
+     <td bordercolor="#000000" colspan="2"><div align="center">____</div></td>
+     <td colspan="6" bordercolor="#000000"><span class="Estilo20">IRREPARABLE</span></td>
+     <td width="69" bordercolor="#000000"><div align="center">____</div></td>
+     <td colspan="9" bordercolor="#000000"><span class="Estilo20">REPARADO</span></td>
+   </tr>
+   <tr>
+     <td height="36" colspan="3" bordercolor="#000000"><div align="right" class="Estilo20">por lo que: </div></td>
+     <td colspan="2" bordercolor="#000000"><div align="center">___</div></td>
+     <td width="63" colspan="3" bordercolor="#000000"><span class="Estilo7">SI</span></td>
+     <td width="32" bordercolor="#000000"><div align="center">___</div></td>
+     <td colspan="3" bordercolor="#000000"><span class="Estilo7">NO</span></td>
+     <td colspan="15" bordercolor="#000000"><span class="Estilo20">procede la propuesta de baja técnica </span></td>
+   </tr>
+   <tr>
+     <td height="23" colspan="8" bordercolor="#000000">&nbsp;</td>
+     <td colspan="16" bordercolor="#000000">&nbsp;</td>
+     <td width="32" colspan="3" bordercolor="#000000">&nbsp;</td>
+   </tr>
+   <tr>
+     <td height="23" colspan="8" bordercolor="#000000"><span class="Estilo20">Nombre y Apellidos del Técnico:</span></td>
+     <td colspan="12" bordercolor="#000000">&nbsp;</td>
+     <td colspan="3" bordercolor="#000000"><span class="Estilo6">Firma:</span></td>
+     <td colspan="4" bordercolor="#000000">&nbsp;</td>
+   </tr>
+ </table>
+ <table width="642" border="1" cellspacing="1">
+   <tr>
+     <th scope="row"><div bgcolor="#CCCCCC" align="left"><span class="Estilo23">Entrega del Equipo </span></div></th>
+   </tr>
+ </table>
+ <table width="652" border="1" cellspacing="1">
+   <tr>
+     <th width="132" rowspan="2" scope="row"><span class="Estilo8">Fecha de Entrega</span></th>
+     <td width="35"><div align="center"><span class="Estilo6">D</span></div></td>
+     <td width="40"><div align="center"><span class="Estilo6">M</span></div></td>
+     <td width="46"><div align="center"><span class="Estilo6">A</span></div></td>
+     <td width="167"><div align="right"><span class="Estilo20">Nombre del Ejecutivo</span></div></td>
+     <td width="198">&nbsp;</td>
+   </tr>
+   <tr>
+     <td height="23">&nbsp;</td>
+     <td>&nbsp;</td>
+     <td>&nbsp;</td>
+     <td><div align="right"><span class="Estilo20">Firma y Cuño</span></div></td>
+     <td>&nbsp;</td>
+   </tr>
+ </table>
+ <table width="652" border="1" cellspacing="1">
+   <tr>
+     <th align="center" width="288" scope="row"><strong><u>Condiciones de la garantía de reparación</u></strong></th>
+     <td align="center" width="351"><strong><u>Casos en que la garantía de reparación no es válida</u></strong></td>
+   </tr>
+   <tr>
+     <td scope="row"><div align="left" class="Estilo20"><span class="Estilo7">* La garantía de reparación es de ______ dias</span></div></td>
+     <td><span class="Estilo20">* No tener este certificado que posea tachaduras, borrones </span></td>
+   </tr>
+   <tr>
+     <td scope="row"><div align="left" class="Estilo20"><span class="Estilo7">naturales a partir de la recogida del equipo. </span></div></td>
+     <td><span class="Estilo20">u otro tipo de alteraciones. </span></td>
+   </tr>
+   <tr>
+     <td scope="row"><div align="left" class="Estilo20">* En el momento de la recogida del equipo, se </div></td>
+     <td><span class="Estilo20">* Si el sello de garantía está; alterado o removido.</span></td>
+   </tr>
+   <tr>
+     <td scope="row"><div align="left" class="Estilo20">adicionará; a la garantía, el tiempo de permanencia</div></td>
+     <td><span class="Estilo20">* Si el número de serie del equipo está; alterado o removido.</span></td>
+   </tr>
+   <tr>
+     <td scope="row"><div align="left" class="Estilo20">en el taller. </div></td>
+     <td><span class="Estilo20">* Daños causados por accidentes, maltratos, uso en</span></td>
+   </tr>
+   <tr>
+     <th rowspan="2" scope="row"><div align="left" class="Estilo13"><u>Observaciones:</u></div></th>
+     <td><span class="Estilo20">desacuerdo con el manual de instrucciones, uso en condi-</span></td>
+   </tr>
+   <tr>
+     <td><span class="Estilo20">ciones ambientales deficientes o por agentes naturales. </span></td>
+   </tr>
+ </table>
+ <table width="652" border="1" cellspacing="1">
+   <tr>
+     <td colspan="5" scope="row"><div align="center" class="Estilo20">Nueva fecha de vencimiento de la garantía</div></td>
+     <td width="348"><div align="center" class="Estilo20"><strong>Acepto las condiciones de garantía: </strong></div></td>
+   </tr>
+   <tr>
+     <th width="81" scope="row">&nbsp;</th>
+     <th width="35" scope="row"><div align="center"><span class="Estilo6">D</div></span></th>
+     <th width="34" scope="row"><div align="center"><span class="Estilo6">M</div></span></th>
+     <th width="34" scope="row"><div align="center"><span class="Estilo6">A</div></span></th>
+     <th width="87" scope="row">&nbsp;</th>
+     <td><div align="center">____________________</div></td>
+   </tr>
+   <tr>
+     <th scope="row">&nbsp;</th>
+     <th scope="row"><div align="center"></div></th>
+     <th scope="row"><div align="center"></div></th>
+     <th scope="row"><div align="center"></div></th>
+     <th scope="row">&nbsp;</th>
+     <td><div align="center" class="Estilo8">Firma del Cliente </div></td>
+   </tr>
+ </table>
+ <table width="652" border="0" cellspacing="1">
+   <tr>
+     <td width="490">&nbsp;</td>
+     <td width="149"><span class="Estilo20">C1302.111</span></td>
+   </tr>
+ </table>
+ <table width="652" border="0" cellspacing="1">
+   <tr>
+     <td align="center">_______________________________________________________________________________________________________________________________</td>
+   </tr>
+ </table>
+ <p>&nbsp;</p>
+ <p>&nbsp;</p>
+</div>
+</div>
+</body>
+</html>

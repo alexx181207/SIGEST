@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SIGEST | Gestión Taller</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'css/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'css/vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+    
+
+    <!-- Custom Theme Style -->
+    <link href="{% static 'css/build/css/custom.min.css' %}" rel="stylesheet">
+  </head>
+
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">          
+          <section class="login_content">
+            <form class="form-horizontal form-label-left" action="." method="post">
+               {% csrf_token %}
+              <h1>SIGEST</h1>
+              <div class="form-group">
+                
+                <div>
+                    <input type="text" class="form-control" placeholder="Username" name="username" required="required"  id="name"/>
+                </div>                  
+              </div>
+              <div class="form-group">
+                
+                <div>
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="required" id="password"/>
+                </div>
+                
+              </div>           
+              <div>
+                <a href="{% url 'index' %}"> <button class="btn btn-success" id="send" type="submit" >Entrar</button></a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                
+
+                <div class="clearfix"></div>
+                <br />
+
+                <div>
+                  <h1><i class="fa fa-phone"></i> ETECSA</h1>
+                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+
+      </div>
+    </div>
+    <script src="{% static 'css/vendors/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'css/vendors/validator/validator.js' %}"></script>
+    <script src="{% static 'css/vendors/fastclick/lib/fastclick.js' %}"></script>
+    <script src="{% static 'js/csrftoken.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'css/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script> 
+
+
+
+  </body>
+</html>
+

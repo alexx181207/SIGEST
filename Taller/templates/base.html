@@ -1,0 +1,332 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SIGEST | Gestión Taller</title>
+    
+
+    
+    <!-- Bootstrap -->
+    <link href="{% static 'css/vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'css/vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'css/vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+
+    <!-- PNotify -->
+    <link href="{% static 'css/vendors/pnotify/dist/pnotify.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendors/pnotify/dist/pnotify.buttons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/vendors/pnotify/dist/pnotify.nonblock.css' %}" rel="stylesheet">
+   
+    
+
+    <!-- Custom Theme Style -->
+    <link href="{% static 'css/build/css/custom.css' %}" rel="stylesheet">
+    
+
+    {% block stylecontent %}
+    
+    {% endblock%}
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="" class="site_title"><i class="fa fa-phone"></i> <span>SIGEST</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="{% static 'img/image.jpg' %}" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Bienvenido (a),</span>
+                <h2 >{{user.first_name}}</h2>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3><a href="{% url 'index' %}"><i class="fa fa-home"></i>Home</a></h3>
+                <ul class="nav side-menu">
+                  {%if perms.Comercial.add_ordenprimaria%}
+                  <li><a><i class="fa fa-book"></i> Comercial <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{% url 'orden_create' %}">Crear Orden</a></li>
+                      <li><a href="{% url 'gestion_telefono' %}">Gestión</a></li>
+                      <li><a href="{% url 'ordenes_reparadas' %}">Cerrar Orden</a></li>
+                      <li><a>Buscar Orden</a></li>
+                    </ul>
+                  </li>
+                  {%endif%}
+                </ul>
+                {%if perms.Comercial.add_ordenhistorico%}
+                <ul class="nav side-menu"> 
+                  <li><a><i class="fa fa-gears"></i> Taller <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{% url 'ordenes_pendientes' %}">Reparación</a></li>
+                      <li><a href="{% url 'registro_tfa' %}">Registro TFA</a></li>
+                      <li><a href="{% url 'registro_tb' %}">Registro TB</a></li>
+                      <li><a>Inventario</a></li>
+                      <li><a>Necesidad de Recursos</a></li>
+                      <li><a>Necesidad de Herramientas</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                {%endif%}
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-info-circle"></i> Información <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="{% url 'trabajos_diarios' %}">Actividades ejecutadas</a></li>
+                      <li><a href="{% url 'ordenes_lista' %}">Listado de Órdenes</a></li>
+                      <li><a href="{% url 'ordenes_pendientes_edades' %}">Órdenes pendientes por edades</a></li>
+                      <li><a href="{% url 'servicio_form' %}">Histórico Servicio</a></li>
+                      <li><a href="{% url 'warranty_list' %}">Órdenes en garantía</a></li>
+                      <li><a>Órdenes fuera de términos<span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li class="sub_menu"><a href="{% url 'defectar_fuera_termino' %}">Sin Defectar</a>
+                          </li>
+                          <li><a href="{% url 'reparar_fuera_termino' %}">Sin Reparar</a>
+                          </li>
+                        </ul>
+                      </li>
+                      </ul>
+                  </li>
+                </ul>
+                <ul class="nav side-menu">
+                  <li><a><i class="fa fa-tasks"></i> Control de Recursos <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a >Entregar recursos</a></li>
+                    </ul>
+                  </li>  
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Change password" href="{% url 'change_password' %}">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="{% url 'logout' %}">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="{% static 'img/image.jpg' %}" alt=""><b style="color: blue;">Usuario: {{user.username}} | Especialidad: {{user.trabajador.especialidad}} | Rol: {%for rol in user.groups.all%} {{rol.name}} {%endfor%}</b>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  {%if perms.Comercial.add_ordenprimaria%}
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"  data-placement="bottom" title="Órdenes Pendientes de Entregar al Taller" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    
+                    <span class="badge bg-green">{{cantidad}}</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    {%for modelo in modelComercial%}
+                    <li>
+                      <a href="{% url 'orden_entrega' modelo.id %}">
+                        <span class="image"><img src="{% static 'img/orden.png' %}" alt="Profile Image" /></span>
+                        <span>
+                          <b><span>Orden: #{{modelo.No_orden}}</span></b>
+                          <span class="time">{{modelo.fecha_creacion.day}}/{{modelo.fecha_creacion.month}}/{{modelo.fecha_creacion.year}}</span>
+                        </span>
+                        <span class="message">
+                          <p>Perteneciente al Servicio: {{modelo.prefijo.nombre}} {{modelo.servicio}}</p>
+                        </span>
+                      </a>
+                    </li>
+                    {%endfor%}
+                    <li>
+                      <div class="text-center">
+                        <a href="{% url 'ordenes_entregar' %}">
+                          <strong>Ver todas las órdenes</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                  {% elif perms.Comercial.add_ordenhistorico %} 
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"  data-placement="bottom" title="Órdenes Pendientes de Confirmación" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                  <span class="badge bg-green">{{cantidad1}}</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    {%for modelo in modelTaller%}
+                    <li>
+                      <a href="{% url 'orden_confirma' modelo.id %}">
+                        <span class="image"><img src="{% static 'img/orden.png' %}" alt="Profile Image" /></span>
+                        <span>
+                          <b><span>Orden: #{{modelo.No_orden}}</span></b>
+                          <span class="time">{{modelo.fecha_creacion.day}}/{{modelo.fecha_creacion.month}}/{{modelo.fecha_creacion.year}}</span>
+                        </span>
+                        <span class="message">
+                          <p>Perteneciente al Servicio: {{modelo.prefijo.nombre}} {{modelo.servicio}}</p>
+                        </span>
+                      </a>
+                    </li>
+                    {%endfor%}
+                    <li>
+                      <div class="text-center">
+                        <a href="{% url 'ordenes_confirmar' %}">
+                          <strong>Ver todas las órdenes</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              {%endif%}
+           
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Sistema de Gestión del Taller</h3>
+      </div>
+
+      <div class="title_right">
+        <!-- <div class="col-md-2 col-sm-5 col-xs-12 form-group">
+          <img src="{% static 'img/images.jpeg' %}" alt="...">
+        </div>-->
+        <div class="col-md-3 col-sm-5 col-xs-12 form-group pull-right top_search">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+   
+        {%block content%}
+       
+        {%endblock%}
+        
+      </div>
+    </div>  
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            SIGEST - Sistema de Gestión del Taller, desarrollado por <a href="">Ing. Alejandro Miguel Blanco Arias</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="{% static 'css/vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'css/vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'css/vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'css/vendors/nprogress/nprogress.js' %}"></script>
+
+     <!-- PNotify -->
+     <script src="{% static 'css/vendors/pnotify/dist/pnotify.js' %}"></script>
+     <script src="{% static 'css/vendors/pnotify/dist/pnotify.buttons.js' %}"></script>
+     <script src="{% static 'css/vendors/pnotify/dist/pnotify.nonblock.js' %}"></script>
+   
+    
+    
+
+    <script>
+      
+       
+  </script>
+
+{% if messages %}
+{% for message in messages %}
+  <script>
+      $(function(){
+            new PNotify({
+            title: 'MENSAJE',
+            text: '{{message}}',
+            nonblock: {
+              nonblock: true
+            },
+            type: 'info',
+            styling: 'bootstrap3'
+          });
+        });
+  </script>
+   {% endfor %}
+   {% endif %}
+    <!-- Custom Theme Scripts -->
+    
+    {% block jscontent %}
+
+    {% endblock %}
+
+    <script src="{% static 'css/build/js/custom.js' %}"></script>
+
+  </body>
+</html>
