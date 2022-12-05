@@ -535,6 +535,12 @@ class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         self.object = form.save()
         return super(RepararOrden, self).form_valid(form)
 
+class UpdateOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
+    pass
+
+class DeleteOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
+    pass
+
 
 class CerrarOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
     model = OrdenPrimaria
