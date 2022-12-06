@@ -21,10 +21,10 @@
 <!-- page content -->
 
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 pagenew-div">
-          <div class="x_panel">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel pagenew-div">
             <div class="x_title">
-              <h2>Órdenes sn confirmar entrega al taller</h2>
+              <h2>Órdenes sin confirmar entrega al taller</h2>
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                 </li>
@@ -45,7 +45,7 @@
             <div class="x_content">
                 <form action = "" method="post">
                     {%csrf_token%} 
-                <table id="datatable" class="table table-bordered table-striped">      
+                <table id="tablalist" class="table table-bordered table-striped">      
                     <thead>
                         <tr>
                             <th>No Orden</th>
@@ -112,10 +112,13 @@
 <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
 <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
 <script src="{% static 'js/csrftoken.js' %}"></script>
+<script src="{% static 'js/table.js' %}"></script>
+
 
 
 <script>  
-
+  
+   createTable("#tablalist");
      
     
     $("button").click(function(e){

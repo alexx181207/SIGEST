@@ -42,7 +42,7 @@
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <table id="datatable" class="table table-bordered table-striped">
+                <table id="tablalist" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>No Orden</th>
@@ -103,7 +103,12 @@
 <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
 <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
 <script src="{% static 'js/csrftoken.js' %}"></script>
+<script src="{% static 'js/table.js' %}"></script>
 
+
+<script>
+  createTable("#tablalist");
+</script>
 
 {%endblock%}
 

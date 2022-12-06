@@ -66,18 +66,18 @@
               <div class="menu_section">
                 <h3><a href="{% url 'index' %}"><i class="fa fa-home"></i>Home</a></h3>
                 <ul class="nav side-menu">
-                  {%if perms.Comercial.add_ordenprimaria%}
+                  {%if perms.Taller.add_ordenprimaria%}
                   <li><a><i class="fa fa-book"></i> Comercial <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{% url 'orden_create' %}">Crear Orden</a></li>
                       <li><a href="{% url 'gestion_telefono' %}">Gestión</a></li>
                       <li><a href="{% url 'ordenes_reparadas' %}">Cerrar Orden</a></li>
-                      <li><a href="{% url 'list_updates' %}">Actualizar Orden</a></li>
+                      <li><a href="{% url 'list_updates' %}">Modificar Orden</a></li>
                     </ul>
                   </li>
                   {%endif%}
                 </ul>
-                {%if perms.Comercial.add_ordenhistorico%}
+                {%if perms.Taller.add_ordenhistorico%}
                 <ul class="nav side-menu"> 
                   <li><a><i class="fa fa-gears"></i> Taller <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -169,7 +169,7 @@
                 </li>
 
                 <li role="presentation" class="dropdown">
-                  {%if perms.Comercial.add_ordenprimaria%}
+                  {%if perms.Taller.add_ordenprimaria%}
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"  data-placement="bottom" title="Órdenes Pendientes de Entregar al Taller" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     
@@ -199,7 +199,7 @@
                       </div>
                     </li>
                   </ul>
-                  {% elif perms.Comercial.add_ordenhistorico %} 
+                  {% elif perms.Taller.add_ordenhistorico %} 
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"  data-placement="bottom" title="Órdenes Pendientes de Confirmación" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                   <span class="badge bg-green">{{cantidad1}}</span>

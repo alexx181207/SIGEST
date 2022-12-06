@@ -24,6 +24,11 @@ urlpatterns = [
         list_views.ListadoReparadas.as_view(),
         name="ordenes_reparadas",
     ),
+    path(
+        "index/list/update/",
+        list_views.ListUpdates.as_view(),
+        name="list_updates",
+    ),
     path("index/list/", list_views.ListadoOrdenesMixin.as_view(), name="ordenes_lista"),
     path(
         "index/list/dia/", list_views.TrabajosDiarios.as_view(), name="trabajos_diarios"
@@ -105,6 +110,12 @@ urlpatterns = [
         "recursos/consumidos/",
         ajax_views.recursos_consumidos,
         name="recursos_consumidos",
+    ),
+    re_path(
+        r"^ordenprimaria/(?P<pk>[0-9]+)/$", views.UpdateOrder.as_view(), name="update_order"
+    ),
+    re_path(
+        r"^ordenprimaria/(?P<pk>[0-9]+)/delete/$", views.DeleteOrder.as_view(), name="delete_order"
     ),
     re_path(
         r"^buscar/servicio/ajax/$", ajax_views.list_json, name="servicio_encontrar"

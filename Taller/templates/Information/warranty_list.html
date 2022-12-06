@@ -45,7 +45,7 @@
             </div>
             <div class="x_content">
                 
-                    <table id="datatable-keytable" class="table table-striped table-bordered">
+                    <table id="tablalist" class="table table-striped table-bordered">
                         <thead>
                           <tr>
                             <th >No Orden</th>
@@ -130,7 +130,12 @@
  <script src="{% static 'css/vendors/jszip/dist/jszip.min.js' %}"></script>
  <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
  <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
- 
+ <script src="{% static 'js/table.js' %}"></script>
+
+
+<script>
+  createTable("#tablalist");
+</script>
 
 {%endblock%}
 

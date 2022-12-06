@@ -34,6 +34,16 @@ class ListadoOrdenesMixin(BaseDatosMixin, ListView):
         )
         return self.orden
 
+class ListUpdates(ListadoOrdenesMixin):
+    template_name = 'Comercial/listUpdate.html'
+
+    def get_queryset(self):
+        self.object_list = (
+            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
+            .exclude(confComercial=True)
+        )
+        return self.object_list
+
 
 class RegistroTFA(ListadoOrdenesMixin):
     template_name = "Taller/list_reg_tfa.html"

@@ -45,7 +45,7 @@
             <div class="x_content">
                 <form action = "" method="post">
                     {%csrf_token%} 
-                <table id="datatable" class="table table-bordered table-striped">      
+                <table id="tablalist" class="table table-bordered table-striped">      
                     <thead>
                         <tr>
                             <th>No Orden</th>
@@ -116,7 +116,7 @@
 
 <script>  
 
-     
+     createTable("#tablalist");
     
     $("button").click(function(e){
       e.preventDefault();

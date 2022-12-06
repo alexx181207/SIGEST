@@ -34,7 +34,7 @@ from django.utils.decorators import method_decorator
 
 # from django.views.generic.base import TemplateResponseMixin, View
 # from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # from django.views.generic.list import ListView
 from django.views.generic.base import View, TemplateView
@@ -93,42 +93,42 @@ class Index(BaseDatosMixin, TemplateView):
             centro=self.request.user.trabajador.centro
         ).filter(cerrada=False)
         cant_defec_tfa = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
             .filter(estado=get_object_or_404(Estado, pk=1))
             .count()
         )
         cant_rep_tfa = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
             .filter(estado=get_object_or_404(Estado, pk=3))
             .count()
         )
         cant_irrep_tfa = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
             .filter(estado=get_object_or_404(Estado, pk=4))
             .count()
         )
         cant_pend_tfa = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
             .filter(estado=get_object_or_404(Estado, pk=2))
             .count()
         )
         cant_defec_tb = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
             .filter(estado=get_object_or_404(Estado, pk=1))
             .count()
         )
         cant_rep_tb = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
             .filter(estado=get_object_or_404(Estado, pk=3))
             .count()
         )
         cant_irrep_tb = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
             .filter(estado=get_object_or_404(Estado, pk=4))
             .count()
         )
         cant_pend_tb = (
-            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
+            Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
             .filter(estado=get_object_or_404(Estado, pk=2))
             .count()
         )
@@ -536,10 +536,50 @@ class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         return super(RepararOrden, self).form_valid(form)
 
 class UpdateOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    pass
+    model=OrdenPrimaria
+    template_name = "Comercial/ordenprimaria_form.html"
+    success_url = reverse_lazy("list_updates")
+    permission_required = "Comercial.add_ordenprimaria"
 
-class DeleteOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    pass
+    fields = [
+        "prefijo",
+        "servicio",
+        "modelo",
+        "defecto",
+        "serie",
+        "nombre_cliente_entrega",
+        "direccion_cliente_entrega",
+        "ci_cliente_entrega",
+        "contacto_telefono",
+        "propietario",
+        "folio_venta",
+        "fecha_venta",
+        "garantia",
+        "fecha_vencimiento_garantia",
+        "observaciones",
+    ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["defec"] = Defecto.objects.all()
+        context["mod"] = Modelo.objects.all()
+        context["prefijo"] = Prefijo.objects.all()
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == "POST":
+            messages.add_message(
+                request, messages.INFO, "La orden fue actualizada con éxito"
+            )
+        return super(UpdateOrder, self).dispatch(request, *args, **kwargs)
+
+
+
+class DeleteOrder(BaseDatosMixin, PermissionRequiredMixin, DeleteView):
+    model=OrdenPrimaria
+    template_name="Comercial/delete_order.html"
+    success_url = reverse_lazy("list_updates")
+    permission_required = "Comercial.add_ordenprimaria"
 
 
 class CerrarOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):

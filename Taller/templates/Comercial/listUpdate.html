@@ -71,12 +71,18 @@
                                 <td>{{model.serie}}</td>
                                 <td>{{model.estado}}</td>
                                 <td>
+                                    <div class="form-group">
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
                                   <form action = "{% url 'update_order' model.id %}" method="get"> {%csrf_token%}
-                                    <button type="submit" class="btn btn-round btn-info" style="margin-left: 20px;"><i class="fa fa-upload" ></i></button>
+                                    <button type="submit" class="btn btn-success" title="Actualizar Orden"><i class="fa fa-upload" ></i></button>
                                     </form>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <form action = "{% url 'delete_order' model.id %}" method="get"> {%csrf_token%}
-                                        <button type="submit" class="btn btn-round btn-info" style="margin-left: 20px;"><i class="fa fa-trash" ></i></button>
+                                        <button type="submit" class="btn  btn-danger" title="Eliminar Orden"><i class="fa fa-trash" ></i></button>
                                     </form>
+                                </div>
+                                </div>
                                 </td>
                                                    
                             </tr>
@@ -111,38 +117,12 @@
  <script src="{% static 'css/vendors/jszip/dist/jszip.min.js' %}"></script>
  <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
  <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+ <script src="{% static 'js/table.js' %}"></script>
 
 
 <script>
-  if ($("#tablalist").length) {
-  $("#tablalist").DataTable({
-    dom: "Blfrtip",
-    buttons: [
-    {
-      extend: "copy",
-      className: "btn-sm"
-    },
-    {
-      extend: "csv",
-      className: "btn-sm"
-    },
-    {
-      extend: "excel",
-      className: "btn-sm"
-    },
-    {
-      extend: "pdfHtml5",
-      className: "btn-sm"
-    },
-    {
-      extend: "print",
-      className: "btn-sm"
-    },
-    ],
-    responsive: false
-  });
-  };
 
-</script>
+  createTable("#tablalist");
+  </script>
 {%endblock%}
 

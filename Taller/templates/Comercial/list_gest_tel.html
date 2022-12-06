@@ -44,7 +44,7 @@
             </div>
             <div class="x_content">
                 
-                <table id="datatable" class="table table-bordered table-striped">      
+                <table id="tablalist" class="table table-bordered table-striped">      
                     <thead>
                         <tr>
                             <th>Llamar</th>
@@ -77,10 +77,6 @@
                         {%endfor%}
                     </tbody>
                 </table>
-
-                <form action = "{% url 'gestion_orden' %}" target="_blank" method="get">
-                  <button type="submit" class="btn btn-custon-rounded-four btn-primary"><span class="fa fa-file-pdf-o"></span> </button>
-                  </form>
             </div>
           </div>
         </div>
@@ -108,7 +104,7 @@
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <table id="datatable-keytable" class="table table-bordered table-striped">      
+                <table id="tablalist1" class="table table-bordered table-striped">      
                     <thead>
                         <tr>
                             <th>No Orden</th>
@@ -135,9 +131,15 @@
                         {%endfor%}
                     </tbody>
                 </table>
+                
             </div>
+            <form action = "{% url 'gestion_orden' %}" target="_blank" method="get">
+                  <button type="submit" class="btn  btn-warning"><span class="fa fa-file-pdf-o"></span> </button>
+            </form>
           </div>
+
         </div>
+
       </div>
  
   <!-- /page content -->
@@ -166,11 +168,13 @@
 <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
 <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
 <script src="{% static 'js/csrftoken.js' %}"></script>
+<script src="{% static 'js/table.js' %}"></script>
+
 
 <script>
-   
+  createTable("#tablalist");
+  createTable("#tablalist1");
 </script>
-
 
 
 {%endblock%}
