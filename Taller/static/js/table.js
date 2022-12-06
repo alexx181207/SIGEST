@@ -6,23 +6,24 @@ function createTable(id){
     buttons: [
     {
       extend: "copy",
-      className: "btn-sm"
+      className: "btn-primary"
     },
     {
       extend: "csv",
-      className: "btn-sm"
+      className: "btn-primary"
     },
     {
       extend: "excel",
-      className: "btn-sm"
+      className: "btn-primary"
+
     },
     {
       extend: "pdfHtml5",
-      className: "btn-sm"
+      className: "btn-primary"
     },
     {
       extend: "print",
-      className: "btn-sm"
+      className: "btn-primary",
     },
     ],
     responsive: false

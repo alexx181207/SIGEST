@@ -41,7 +41,7 @@
               <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <table id="datatable" class="table table-bordered table-striped">
+                <table id="tablalist" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>No Orden</th>
@@ -89,6 +89,9 @@
 {%block jscontent%}
 
 <!-- Datatables -->
+<script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
+<script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
+<script src="{% static 'css/vendors/jszip/dist/jszip.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
@@ -96,16 +99,17 @@
 <script src="{% static 'css/vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
-<script src="{% static 'css/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
-<script src="{% static 'css/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
-<script src="{% static 'css/vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
-<script src="{% static 'css/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}"></script>
-<script src="{% static 'css/vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}"></script>
-<script src="{% static 'css/vendors/jszip/dist/jszip.min.js' %}"></script>
-<script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
-<script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
-<script src="{% static 'js/csrftoken.js' %}"></script>
 
+
+
+<script src="{% static 'js/csrftoken.js' %}"></script>
+<script src="{% static 'js/table.js' %}"></script>
+
+
+<script>
+
+  createTable("#tablalist");
+  </script>
 
 {%endblock%}
 
