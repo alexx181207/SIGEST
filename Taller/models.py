@@ -1,9 +1,7 @@
 from django.db import models
-
-# from django.contrib.auth.models import User
 from django.conf import settings
 
-# from django.shortcuts import get_object_or_404
+
 
 # Create your models here.
 class Division_Territorial(models.Model):

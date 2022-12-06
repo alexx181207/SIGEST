@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template, render_to_string
 
 from django.template.context import Context, make_context
-from django.shortcuts import render, get_object_or_404  # , render_to_response
+from django.shortcuts import render, get_object_or_404
 #from xhtml2pdf import pisa
 
 

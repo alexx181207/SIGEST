@@ -1,385 +1,547 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block stylecontent %}
-
-
 <link rel="stylesheet" href="{% static 'css/stylesnew.css' %}">
-
-
 <style type="text/css">
-
 .Estilo1 {
-	font-family: "Times New Roman", Times, serif;
-	font-size: 16px;
-	font-weight: bold;
-}
-.Estilo5 {
-	font-family: "Times New Roman", Times, serif;
-	font-weight: bold;
-}
-.Estilo6 {font-size: 14px}
-.Estilo7 {font-family: "Times New Roman", Times, serif}
-.Estilo8 {font-family: "Times New Roman", Times, serif; font-size: 16px; }
-.Estilo23 {font-family: "Times New Roman", Times, serif; font-style: italic; font-weight: bold; font-size: 16px; }
-.Estilo20 {font-size: 14px; font-family: "Times New Roman", Times, serif; }
-.Estilo25 {font-style: italic; font-weight: bold; font-family: "Times New Roman", Times, serif;}
-.Estilo10 {font-size: 16px; font-weight: bold; font-style: italic;}
-.Estilo17 {font-size: 14}
-.Estilo28 {font-size: 14px; font-weight: bold; font-family: "Times New Roman", Times, serif; }
-.Estilo29 {font-size: 14; font-family: "Times New Roman", Times, serif; }
-.Estilo30 {font-size: 13px; font-family: "Times New Roman", Times, serif; }
-.Estilo13 {
-	font-family: "Times New Roman", Times, serif;
-	font-style: italic;
-	font-size: 14px;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    font-weight: bold;
 }
 
+.Estilo5 {
+    font-family: "Times New Roman", Times, serif;
+    font-weight: bold;
+}
+
+.Estilo6 {
+    font-size: 14px
+}
+
+.Estilo7 {
+    font-family: "Times New Roman", Times, serif
+}
+
+.Estilo8 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+}
+
+.Estilo23 {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.Estilo20 {
+    font-size: 14px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.Estilo25 {
+    font-style: italic;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.Estilo10 {
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.Estilo17 {
+    font-size: 14
+}
+
+.Estilo28 {
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.Estilo29 {
+    font-size: 14;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.Estilo30 {
+    font-size: 13px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+.Estilo13 {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 14px;
+}
 </style>
 {% endblock %}
-
-
-
 {% block content %}
-
 <!-- page content -->
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel pagenew-div">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel pagenew-div">
             <div class="x_title">
-              <h4><b>Orden de Trabajo</b></h4>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
+                <h4><b>Orden de Trabajo</b></h4>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li><a href="#">Settings 2</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
                     </li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
             </div>
             <div class="x_content">
-              <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-8">
-    </div>
-    <div class="col-sm-2" title="Carta de garantía">
-      <form action = "{% url 'imp_garantia' %}" target="_blank" method="get">
-        <button type="submit" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Garantia</button>
-    </form>
-    </div>
-  <div class="col-sm-2" title="Certificado de garantía y PostVenta">
-    <form action = "{% url 'imp_orden' %}" target="_blank" method="get">
-      <button type="submit" class="btn btn-success"><i class="fa fa-file-pdf-o" ></i> Orden</button>
-  </form>
-  </div>
-</div>
- <p>&nbsp;</p>
- <div>
- 
-  <div class="row">
-    <div class="col-sm-3">
-   </div>
-    <div class="col-sm-5">
-     <p><img src= "{% static 'img/etecsa.png' %}"  width="161" height="59"></p>
-   </div>
-
-   <div class="col-sm-4">
-     <p><span class="Estilo1">FOLIO:    {{model.No_orden}}</span></p>
-   </div>
-  </div>
- <div class="col-lg-3">
- </div>
- <div class="col-lg-9">
-<table width="652" height="52" border="2" align="left">
-  <tr>
-    <td width="527" rowspan="2" bordercolor="#000000"><div align="center"><span class="Estilo1">CERTIFICADO DE SERVICIO DE GARANTIA Y POSTVENTA</span> </div></td>
-    <td width="31" height="21" bordercolor="#000000"><div align="center" class="Estilo5">
-      <div align="center"><span class="Estilo6">D</span></div>
-    </div></td>
-    <td width="33" bordercolor="#000000"><div align="center" class="Estilo5">
-      <div align="center"><span class="Estilo6">M</span></div>
-    </div></td>
-    <td width="33" bordercolor="#000000"><div align="center" class="Estilo5">
-      <div align="center"><span class="Estilo6">A</span></div>
-    </div></td>
-  </tr>
-  <tr>
-    <td height="23" bordercolor="#000000"><div align="center"><span class="Estilo7">{{model.fecha_creacion.day}}</span></div></td>
-    <td bordercolor="#000000"><div align="center"><span class="Estilo7">{{model.fecha_creacion.month}}</span></div></td>
-    <td bordercolor="#000000"><div align="center"><span class="Estilo7">{{model.fecha_creacion.year}}</span></div></td>
-  </tr>
-</table>
- <p>&nbsp;</p>
-
- <table width="652" border="2" cellspacing="1" bordercolor="#000000">
-   <tr>
-     <td width="158"><span class="Estilo8">Taller de Reparaciones: </span></td>
-     <td width="481">_________________{{model.centro.nombre}}_________________________________</td>
-   </tr>
- </table>
- <table width="642" border="1" cellspacing="1">
-   <tr>
-     <th scope="row"><div align="left" bgcolor="#CCCCCC"><span class="Estilo23">Recepción del Equipo</span></div></th>
-   </tr>
- </table>
- <table width="652" height="169" border="2" cellspacing="0" bordercolor="#000000">
-   <tr>
-     <td height="23" colspan="11" bordercolor="#000000">&nbsp;</td>
-     <td colspan="5" bordercolor="#000000"><div align="center"><span class="Estilo20">C. Identidad</span></div></td>
-     <td colspan="5" bordercolor="#000000"><div align="center"><span class="Estilo20">Forma de Pago</span></div></td>
-     <td colspan="6" bordercolor="#000000"><div align="center" class="Estilo20">
-         <div align="center">Ref. Doc. Compra</div>
-     </div></td>
-   </tr>
-   <tr>
-     <td height="23" colspan="2" bordercolor="#000000"><span class="Estilo20">Cliente</span></td>
-     <td colspan="9" bordercolor="#000000"><div align="center"><span class="Estilo7">{{model.nombre_cliente_entrega}}</span></div></td>
-     <td colspan="5" rowspan="2" bordercolor="#000000"><div align="center"><span class="Estilo20">{{model.ci_cliente_entrega}}</span></div></td>
-     <td colspan="5" rowspan="2" bordercolor="#000000"><span class="Estilo7"></span></td>
-     <td colspan="2" bordercolor="#000000"><span class="Estilo20">Folio</span></td>
-     <td width="138" colspan="4" bordercolor="#000000">{%if model.folio_venta is not None%}{{model.folio_venta}}{%endif%}</td>
-   </tr>
-   <tr>
-     <td height="23" colspan="2" bordercolor="#000000"><span class="Estilo20">Dirección</span></td>
-     <td colspan="9" bordercolor="#000000"><div align="center"><span class="Estilo7">{{model.direccion_cliente_entrega}}</span></div></td>
-     <td colspan="2" bordercolor="#000000"><span class="Estilo20">Fecha</span></td>
-     <td colspan="4" bordercolor="#000000"><div align="center"><span class="Estilo7">
-     {%if model.fecha_venta is not None%}{{model.fecha_venta.day}}/{{model.fecha_venta.month}}/{{model.fecha_venta.year}}{%endif%}</span></div></td>
-   </tr>
-   <tr>
-     <td height="23" colspan="27" ><div align="justify" class="Estilo23"> Descripción del Equipo a Reparar </div></td>
-   </tr>
-   <tr>
-     <td height="20" colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">Código</div></td>
-     <td colspan="4" bordercolor="#000000"><div align="center" class="Estilo20">Equipo</div></td>
-     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">Marca/Modelo</div></td>
-     <td colspan="5" bordercolor="#000000"><div align="center" class="Estilo20">No. Serie </div></td>
-     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">Garantía</div></td>
-     <td colspan="9" bordercolor="#000000"><div align="center" class="Estilo20">Vencimiento de la Garantía </div></td>
-   </tr>
-   <tr>
-     <td height="23" colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">{{model.modelo.codigo_sap}}</div></td>
-     <td colspan="4" bordercolor="#000000"><div align="center" class="Estilo20">{{model.modelo.descripcion}}</div></td>
-     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">{{model.modelo.nombre}}</div></td>
-     <td colspan="5" bordercolor="#000000"><div align="center" class="Estilo20">{{model.serie}}</div></td>
-     <td colspan="3" bordercolor="#000000"><div align="center" class="Estilo20">{{model.garantia}}</div></td>
-     <td colspan="9" bordercolor="#000000"><div align="center" class="Estilo20">{%if model.fecha_vencimiento_garantia is not None%}{{model.fecha_vencimiento_garantia.day}}/{{model.fecha_vencimiento_garantia.month}}/{{model.fecha_vencimiento_garantia.year}}{%endif%}</div></td>
-   </tr>
-   <tr>
-     <td height="35" colspan="2" bordercolor="#000000" class="Estilo25"><u>Observaciones:</u></td>
-     <td colspan="25" bordercolor="#000000"><div align="left" class="Estilo7">{%for defecto in model.defecto.all%}{{defecto.nombre}}, {%endfor%} {{model.observaciones}}</div></td>
-   </tr>
- </table>
- <table width="642" border="1" cellspacing="1">
-   <tr>
-     <th scope="row"><div bgcolor="#CCCCCC" align="left"><span class="Estilo23">Orden de Trabajo (para uso del técnico de reparaciones)</span></div></th>
-   </tr>
- </table>
- <table width="652" height="388" border="2" cellspacing="0" bordercolor="#000000">
-   <tr>
-     <td colspan="3" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Código</h4></td>
-     <td colspan="11" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Tipo de Mano de Obra </h4></td>
-     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Precio</h4></td>
-     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Importe</h4></td>
-     <td width="40" height="23" bordercolor="#000000"><div align="center">___</div></td>
-     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUC</span></td>
-   </tr>
-   <tr>
-     <td height="23" bordercolor="#000000"><div align="center">___</div></td>
-     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUP</span></td>
-   </tr>
-   <tr>
-     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
-     <td colspan="11" bordercolor="#000000">&nbsp;</td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-     <td colspan="9" bordercolor="#000000">&nbsp;</td>
-   </tr>
-   <tr>
-     <td height="23" colspan="27" bgcolor="#CCCCCC"><span class="Estilo23">Relación de piezas y/o refacciones utilizadas</span></td>
-   </tr>
-   <tr>
-     <td colspan="3" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Código</h4></td>
-     <td colspan="11" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Tipo de Mano de Obra </h4></td>
-     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Precio</h4></td>
-     <td colspan="4" rowspan="2" bordercolor="#000000"><h4 align="center" class="Estilo20">Importe</h4></td>
-     <td height="25" bordercolor="#000000"><div align="center">___</div></td>
-     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUC</span></td>
-   </tr>
-   <tr>
-     <td height="23" bordercolor="#000000"><div align="center">___</div></td>
-     <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUP</span></td>
-   </tr>
-   <tr>
-     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
-     <td colspan="11" bordercolor="#000000">&nbsp;</td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-     <td colspan="5" bordercolor="#000000">&nbsp;</td>
-   </tr>
-   <tr>
-     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
-     <td colspan="11" bordercolor="#000000">&nbsp;</td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-     <td colspan="5" bordercolor="#000000">&nbsp;</td>
-   </tr>
-   <tr>
-     <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
-     <td colspan="11" bordercolor="#000000">&nbsp;</td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-     <td colspan="5" bordercolor="#000000">&nbsp;</td>
-   </tr>
-   <tr>
-     <td height="23" colspan="17" bordercolor="#000000"><span class="Estilo30">La reparación de equipos en garantía, es libre de costo para el cliente</span></td>
-     <td colspan="5" bordercolor="#000000"><span class="Estilo30">Importe T. </span></td>
-     <td colspan="5" bordercolor="#000000">&nbsp;</td>
-   </tr>
-   <tr>
-     <td height="21" colspan="27" bordercolor="#000000" class="Estilo10"><u><span class="Estilo20">Dictamen Técnico del Equipo:</span></u></td>
-   </tr>
-   <tr>
-     <td height="36" colspan="8" bordercolor="#000000"><span class="Estilo20">El equipo a reparar se dictamina como: </span></td>
-     <td bordercolor="#000000"><div align="center">____</div></td>
-     <td colspan="7" bordercolor="#000000"><span class="Estilo20">IRREPARABLE</span></td>
-     <td width="69" bordercolor="#000000"><div align="center">____</div></td>
-     <td colspan="10" bordercolor="#000000"><span class="Estilo20">REPARADO</span></td>
-   </tr>
-   <tr>
-     <td height="36" colspan="3" bordercolor="#000000"><div align="right" class="Estilo20">por lo que: </div></td>
-     <td colspan="4" bordercolor="#000000"><div align="center">___</div></td>
-     <td width="63" bordercolor="#000000"><span class="Estilo7">SI</span></td>
-     <td width="32" bordercolor="#000000"><div align="center">___</div></td>
-     <td colspan="3" bordercolor="#000000"><span class="Estilo7">NO</span></td>
-     <td colspan="15" bordercolor="#000000"><span class="Estilo20">procede la propuesta de baja técnica </span></td>
-   </tr>
-   <tr>
-     <td height="23" colspan="8" bordercolor="#000000">&nbsp;</td>
-     <td colspan="16" bordercolor="#000000">&nbsp;</td>
-     <td width="32" colspan="3" bordercolor="#000000">&nbsp;</td>
-   </tr>
-   <tr>
-     <td height="23" colspan="8" bordercolor="#000000"><span class="Estilo20">Nombre y Apellidos del Técnico:</span></td>
-     <td colspan="12" bordercolor="#000000">&nbsp;</td>
-     <td colspan="3" bordercolor="#000000"><span class="Estilo6">Firma:</span></td>
-     <td colspan="4" bordercolor="#000000">&nbsp;</td>
-   </tr>
- </table>
- <table width="642" border="1" cellspacing="1">
-   <tr>
-     <th scope="row"><div bgcolor="#CCCCCC" align="left"><span class="Estilo23">Entrega del Equipo </span></div></th>
-   </tr>
- </table>
- <table width="652" border="1" cellspacing="1">
-   <tr>
-     <th width="132" rowspan="2" scope="row"><span class="Estilo8">Fecha de Entrega</span></th>
-     <td width="35"><div align="center"><span class="Estilo6">D</span></div></td>
-     <td width="40"><div align="center"><span class="Estilo6">M</span></div></td>
-     <td width="46"><div align="center"><span class="Estilo6">A</span></div></td>
-     <td width="167"><div align="right"><span class="Estilo20">Nombre del Ejecutivo</span></div></td>
-     <td width="198">&nbsp;</td>
-   </tr>
-   <tr>
-     <td height="23">&nbsp;</td>
-     <td>&nbsp;</td>
-     <td>&nbsp;</td>
-     <td><div align="right"><span class="Estilo20">Firma y Cuño</span></div></td>
-     <td>&nbsp;</td>
-   </tr>
- </table>
- <table width="652" border="1" cellspacing="1">
-   <tr>
-     <th align="center" width="288" scope="row"><strong><u>Condiciones de la garantía de reparación</u></strong></th>
-     <td align="center" width="351"><strong><u>Casos en que la garantía de reparación no es válida</u></strong></td>
-   </tr>
-   <tr>
-     <td scope="row"><div align="left" class="Estilo20"><span class="Estilo7">* La garantía de reparación es de ______ dias</span></div></td>
-     <td><span class="Estilo20">* No tener este certificado que posea tachaduras, borrones </span></td>
-   </tr>
-   <tr>
-     <td scope="row"><div align="left" class="Estilo20"><span class="Estilo7">naturales a partir de la recogida del equipo. </span></div></td>
-     <td><span class="Estilo20">u otro tipo de alteraciones. </span></td>
-   </tr>
-   <tr>
-     <td scope="row"><div align="left" class="Estilo20">* En el momento de la recogida del equipo, se </div></td>
-     <td><span class="Estilo20">* Si el sello de garantía está; alterado o removido.</span></td>
-   </tr>
-   <tr>
-     <td scope="row"><div align="left" class="Estilo20">adicionará; a la garantía, el tiempo de permanencia</div></td>
-     <td><span class="Estilo20">* Si el número de serie del equipo está; alterado o removido.</span></td>
-   </tr>
-   <tr>
-     <td scope="row"><div align="left" class="Estilo20">en el taller. </div></td>
-     <td><span class="Estilo20">* Daños causados por accidentes, maltratos, uso en</span></td>
-   </tr>
-   <tr>
-     <th rowspan="2" scope="row"><div align="left" class="Estilo13"><u>Observaciones:</u></div></th>
-     <td><span class="Estilo20">desacuerdo con el manual de instrucciones, uso en condi-</span></td>
-   </tr>
-   <tr>
-     <td><span class="Estilo20">ciones ambientales deficientes o por agentes naturales. </span></td>
-   </tr>
- </table>
- <table width="652" border="1" cellspacing="1">
-   <tr>
-     <td colspan="5" scope="row"><div align="center" class="Estilo20">Nueva fecha de vencimiento de la garantía</div></td>
-     <td width="348"><div align="center" class="Estilo20"><strong>Acepto las condiciones de garantía: </strong></div></td>
-   </tr>
-   <tr>
-     <th width="81" scope="row">&nbsp;</th>
-     <th width="35" scope="row"><div align="center"><span class="Estilo6">D</div></span></th>
-     <th width="34" scope="row"><div align="center"><span class="Estilo6">M</div></span></th>
-     <th width="34" scope="row"><div align="center"><span class="Estilo6">A</div></span></th>
-     <th width="87" scope="row">&nbsp;</th>
-     <td><div align="center">____________________</div></td>
-   </tr>
-   <tr>
-     <th scope="row">&nbsp;</th>
-     <th scope="row"><div align="center"></div></th>
-     <th scope="row"><div align="center"></div></th>
-     <th scope="row"><div align="center"></div></th>
-     <th scope="row">&nbsp;</th>
-     <td><div align="center" class="Estilo8">Firma del Cliente </div></td>
-   </tr>
- </table>
- <table width="652" border="0" cellspacing="1">
-   <tr>
-     <td width="490">&nbsp;</td>
-     <td width="149">C1302.111</td>
-   </tr>
- </table>
- <table width="652" border="0" cellspacing="1">
-   <tr>
-     <td align="center">_____________________________________________________________________________________</td>
-   </tr>
- </table>
- 
-</div>
-
-</div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-8">
+                        </div>
+                        <div class="col-sm-2" title="Carta de garantía">
+                            <form action="{% url 'imp_garantia' %}" target="_blank" method="get">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Garantia</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-2" title="Certificado de garantía y PostVenta">
+                            <form action="{% url 'imp_orden' %}" target="_blank" method="get">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Orden</button>
+                            </form>
+                        </div>
+                    </div>
+                    <p>&nbsp;</p>
+                    <div>
+                        <div class="row">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-5">
+                                <p><img src="{% static 'img/etecsa.png' %}" width="161" height="59"></p>
+                            </div>
+                            <div class="col-sm-4">
+                                <p><span class="Estilo1">FOLIO: {{model.No_orden}}</span></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                        </div>
+                        <div class="col-lg-9">
+                            <table width="652" height="52" border="2" align="left">
+                                <tr>
+                                    <td width="527" rowspan="2" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo1">CERTIFICADO DE SERVICIO DE GARANTIA Y POSTVENTA</span> </div>
+                                    </td>
+                                    <td width="31" height="21" bordercolor="#000000">
+                                        <div align="center" class="Estilo5">
+                                            <div align="center"><span class="Estilo6">D</span></div>
+                                        </div>
+                                    </td>
+                                    <td width="33" bordercolor="#000000">
+                                        <div align="center" class="Estilo5">
+                                            <div align="center"><span class="Estilo6">M</span></div>
+                                        </div>
+                                    </td>
+                                    <td width="33" bordercolor="#000000">
+                                        <div align="center" class="Estilo5">
+                                            <div align="center"><span class="Estilo6">A</span></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="23" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo7">{{model.fecha_creacion.day}}</span></div>
+                                    </td>
+                                    <td bordercolor="#000000">
+                                        <div align="center"><span class="Estilo7">{{model.fecha_creacion.month}}</span></div>
+                                    </td>
+                                    <td bordercolor="#000000">
+                                        <div align="center"><span class="Estilo7">{{model.fecha_creacion.year}}</span></div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <p>&nbsp;</p>
+                            <table width="652" border="2" cellspacing="1" bordercolor="#000000">
+                                <tr>
+                                    <td width="158"><span class="Estilo8">Taller de Reparaciones: </span></td>
+                                    <td width="481">_________________{{model.centro.nombre}}_________________________________</td>
+                                </tr>
+                            </table>
+                            <table width="642" border="1" cellspacing="1">
+                                <tr>
+                                    <th scope="row">
+                                        <div align="left" bgcolor="#CCCCCC"><span class="Estilo23">Recepción del Equipo</span></div>
+                                    </th>
+                                </tr>
+                            </table>
+                            <table width="652" height="169" border="2" cellspacing="0" bordercolor="#000000">
+                                <tr>
+                                    <td height="23" colspan="11" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="5" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo20">C. Identidad</span></div>
+                                    </td>
+                                    <td colspan="5" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo20">Forma de Pago</span></div>
+                                    </td>
+                                    <td colspan="6" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">
+                                            <div align="center">Ref. Doc. Compra</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="2" bordercolor="#000000"><span class="Estilo20">Cliente</span></td>
+                                    <td colspan="9" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo7">{{model.nombre_cliente_entrega}}</span></div>
+                                    </td>
+                                    <td colspan="5" rowspan="2" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo20">{{model.ci_cliente_entrega}}</span></div>
+                                    </td>
+                                    <td colspan="5" rowspan="2" bordercolor="#000000"><span class="Estilo7"></span></td>
+                                    <td colspan="2" bordercolor="#000000"><span class="Estilo20">Folio</span></td>
+                                    <td width="138" colspan="4" bordercolor="#000000">{%if model.folio_venta is not None%}{{model.folio_venta}}{%endif%}</td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="2" bordercolor="#000000"><span class="Estilo20">Dirección</span></td>
+                                    <td colspan="9" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo7">{{model.direccion_cliente_entrega}}</span></div>
+                                    </td>
+                                    <td colspan="2" bordercolor="#000000"><span class="Estilo20">Fecha</span></td>
+                                    <td colspan="4" bordercolor="#000000">
+                                        <div align="center"><span class="Estilo7">
+                                                {%if model.fecha_venta is not None%}{{model.fecha_venta.day}}/{{model.fecha_venta.month}}/{{model.fecha_venta.year}}{%endif%}</span></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="27">
+                                        <div align="justify" class="Estilo23"> Descripción del Equipo a Reparar </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="20" colspan="3" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">Código</div>
+                                    </td>
+                                    <td colspan="4" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">Equipo</div>
+                                    </td>
+                                    <td colspan="3" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">Marca/Modelo</div>
+                                    </td>
+                                    <td colspan="5" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">No. Serie </div>
+                                    </td>
+                                    <td colspan="3" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">Garantía</div>
+                                    </td>
+                                    <td colspan="9" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">Vencimiento de la Garantía </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="3" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">{{model.modelo.codigo_sap}}</div>
+                                    </td>
+                                    <td colspan="4" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">{{model.modelo.descripcion}}</div>
+                                    </td>
+                                    <td colspan="3" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">{{model.modelo.nombre}}</div>
+                                    </td>
+                                    <td colspan="5" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">{{model.serie}}</div>
+                                    </td>
+                                    <td colspan="3" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">{{model.garantia}}</div>
+                                    </td>
+                                    <td colspan="9" bordercolor="#000000">
+                                        <div align="center" class="Estilo20">{%if model.fecha_vencimiento_garantia is not None%}{{model.fecha_vencimiento_garantia.day}}/{{model.fecha_vencimiento_garantia.month}}/{{model.fecha_vencimiento_garantia.year}}{%endif%}</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="35" colspan="2" bordercolor="#000000" class="Estilo25"><u>Observaciones:</u></td>
+                                    <td colspan="25" bordercolor="#000000">
+                                        <div align="left" class="Estilo7">{%for defecto in model.defecto.all%}{{defecto.nombre}}, {%endfor%} {{model.observaciones}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="642" border="1" cellspacing="1">
+                                <tr>
+                                    <th scope="row">
+                                        <div bgcolor="#CCCCCC" align="left"><span class="Estilo23">Orden de Trabajo (para uso del técnico de reparaciones)</span></div>
+                                    </th>
+                                </tr>
+                            </table>
+                            <table width="652" height="388" border="2" cellspacing="0" bordercolor="#000000">
+                                <tr>
+                                    <td colspan="3" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Código</h4>
+                                    </td>
+                                    <td colspan="11" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Tipo de Mano de Obra </h4>
+                                    </td>
+                                    <td colspan="4" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Precio</h4>
+                                    </td>
+                                    <td colspan="4" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Importe</h4>
+                                    </td>
+                                    <td width="40" height="23" bordercolor="#000000">
+                                        <div align="center">___</div>
+                                    </td>
+                                    <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUC</span></td>
+                                </tr>
+                                <tr>
+                                    <td height="23" bordercolor="#000000">
+                                        <div align="center">___</div>
+                                    </td>
+                                    <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUP</span></td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="11" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="9" bordercolor="#000000">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="27" bgcolor="#CCCCCC"><span class="Estilo23">Relación de piezas y/o refacciones utilizadas</span></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Código</h4>
+                                    </td>
+                                    <td colspan="11" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Tipo de Mano de Obra </h4>
+                                    </td>
+                                    <td colspan="4" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Precio</h4>
+                                    </td>
+                                    <td colspan="4" rowspan="2" bordercolor="#000000">
+                                        <h4 align="center" class="Estilo20">Importe</h4>
+                                    </td>
+                                    <td height="25" bordercolor="#000000">
+                                        <div align="center">___</div>
+                                    </td>
+                                    <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUC</span></td>
+                                </tr>
+                                <tr>
+                                    <td height="23" bordercolor="#000000">
+                                        <div align="center">___</div>
+                                    </td>
+                                    <td colspan="4" bordercolor="#000000"><span class="Estilo20">CUP</span></td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="11" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="5" bordercolor="#000000">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="11" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="5" bordercolor="#000000">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="3" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="11" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="5" bordercolor="#000000">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="17" bordercolor="#000000"><span class="Estilo30">La reparación de equipos en garantía, es libre de costo para el cliente</span></td>
+                                    <td colspan="5" bordercolor="#000000"><span class="Estilo30">Importe T. </span></td>
+                                    <td colspan="5" bordercolor="#000000">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="21" colspan="27" bordercolor="#000000" class="Estilo10"><u><span class="Estilo20">Dictamen Técnico del Equipo:</span></u></td>
+                                </tr>
+                                <tr>
+                                    <td height="36" colspan="8" bordercolor="#000000"><span class="Estilo20">El equipo a reparar se dictamina como: </span></td>
+                                    <td bordercolor="#000000">
+                                        <div align="center">____</div>
+                                    </td>
+                                    <td colspan="7" bordercolor="#000000"><span class="Estilo20">IRREPARABLE</span></td>
+                                    <td width="69" bordercolor="#000000">
+                                        <div align="center">____</div>
+                                    </td>
+                                    <td colspan="10" bordercolor="#000000"><span class="Estilo20">REPARADO</span></td>
+                                </tr>
+                                <tr>
+                                    <td height="36" colspan="3" bordercolor="#000000">
+                                        <div align="right" class="Estilo20">por lo que: </div>
+                                    </td>
+                                    <td colspan="4" bordercolor="#000000">
+                                        <div align="center">___</div>
+                                    </td>
+                                    <td width="63" bordercolor="#000000"><span class="Estilo7">SI</span></td>
+                                    <td width="32" bordercolor="#000000">
+                                        <div align="center">___</div>
+                                    </td>
+                                    <td colspan="3" bordercolor="#000000"><span class="Estilo7">NO</span></td>
+                                    <td colspan="15" bordercolor="#000000"><span class="Estilo20">procede la propuesta de baja técnica </span></td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="8" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="16" bordercolor="#000000">&nbsp;</td>
+                                    <td width="32" colspan="3" bordercolor="#000000">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="23" colspan="8" bordercolor="#000000"><span class="Estilo20">Nombre y Apellidos del Técnico:</span></td>
+                                    <td colspan="12" bordercolor="#000000">&nbsp;</td>
+                                    <td colspan="3" bordercolor="#000000"><span class="Estilo6">Firma:</span></td>
+                                    <td colspan="4" bordercolor="#000000">&nbsp;</td>
+                                </tr>
+                            </table>
+                            <table width="642" border="1" cellspacing="1">
+                                <tr>
+                                    <th scope="row">
+                                        <div bgcolor="#CCCCCC" align="left"><span class="Estilo23">Entrega del Equipo </span></div>
+                                    </th>
+                                </tr>
+                            </table>
+                            <table width="652" border="1" cellspacing="1">
+                                <tr>
+                                    <th width="132" rowspan="2" scope="row"><span class="Estilo8">Fecha de Entrega</span></th>
+                                    <td width="35">
+                                        <div align="center"><span class="Estilo6">D</span></div>
+                                    </td>
+                                    <td width="40">
+                                        <div align="center"><span class="Estilo6">M</span></div>
+                                    </td>
+                                    <td width="46">
+                                        <div align="center"><span class="Estilo6">A</span></div>
+                                    </td>
+                                    <td width="167">
+                                        <div align="right"><span class="Estilo20">Nombre del Ejecutivo</span></div>
+                                    </td>
+                                    <td width="198">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="23">&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <div align="right"><span class="Estilo20">Firma y Cuño</span></div>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </table>
+                            <table width="652" border="1" cellspacing="1">
+                                <tr>
+                                    <th align="center" width="288" scope="row"><strong><u>Condiciones de la garantía de reparación</u></strong></th>
+                                    <td align="center" width="351"><strong><u>Casos en que la garantía de reparación no es válida</u></strong></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <div align="left" class="Estilo20"><span class="Estilo7">* La garantía de reparación es de ______ dias</span></div>
+                                    </td>
+                                    <td><span class="Estilo20">* No tener este certificado que posea tachaduras, borrones </span></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <div align="left" class="Estilo20"><span class="Estilo7">naturales a partir de la recogida del equipo. </span></div>
+                                    </td>
+                                    <td><span class="Estilo20">u otro tipo de alteraciones. </span></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <div align="left" class="Estilo20">* En el momento de la recogida del equipo, se </div>
+                                    </td>
+                                    <td><span class="Estilo20">* Si el sello de garantía está; alterado o removido.</span></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <div align="left" class="Estilo20">adicionará; a la garantía, el tiempo de permanencia</div>
+                                    </td>
+                                    <td><span class="Estilo20">* Si el número de serie del equipo está; alterado o removido.</span></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">
+                                        <div align="left" class="Estilo20">en el taller. </div>
+                                    </td>
+                                    <td><span class="Estilo20">* Daños causados por accidentes, maltratos, uso en</span></td>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2" scope="row">
+                                        <div align="left" class="Estilo13"><u>Observaciones:</u></div>
+                                    </th>
+                                    <td><span class="Estilo20">desacuerdo con el manual de instrucciones, uso en condi-</span></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="Estilo20">ciones ambientales deficientes o por agentes naturales. </span></td>
+                                </tr>
+                            </table>
+                            <table width="652" border="1" cellspacing="1">
+                                <tr>
+                                    <td colspan="5" scope="row">
+                                        <div align="center" class="Estilo20">Nueva fecha de vencimiento de la garantía</div>
+                                    </td>
+                                    <td width="348">
+                                        <div align="center" class="Estilo20"><strong>Acepto las condiciones de garantía: </strong></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th width="81" scope="row">&nbsp;</th>
+                                    <th width="35" scope="row">
+                                        <div align="center"><span class="Estilo6">D</div></span>
+                                    </th>
+                                    <th width="34" scope="row">
+                                        <div align="center"><span class="Estilo6">M</div></span>
+                                    </th>
+                                    <th width="34" scope="row">
+                                        <div align="center"><span class="Estilo6">A</div></span>
+                                    </th>
+                                    <th width="87" scope="row">&nbsp;</th>
+                                    <td>
+                                        <div align="center">____________________</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">&nbsp;</th>
+                                    <th scope="row">
+                                        <div align="center"></div>
+                                    </th>
+                                    <th scope="row">
+                                        <div align="center"></div>
+                                    </th>
+                                    <th scope="row">
+                                        <div align="center"></div>
+                                    </th>
+                                    <th scope="row">&nbsp;</th>
+                                    <td>
+                                        <div align="center" class="Estilo8">Firma del Cliente </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table width="652" border="0" cellspacing="1">
+                                <tr>
+                                    <td width="490">&nbsp;</td>
+                                    <td width="149">C1302.111</td>
+                                </tr>
+                            </table>
+                            <table width="652" border="0" cellspacing="1">
+                                <tr>
+                                    <td align="center">_____________________________________________________________________________________</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-          </div>
         </div>
-      </div>
- 
+    </div>
+</div>
 {% endblock %}
-
-
-  </div>
-  </div>
-
-
-
+</div>
+</div>
 {%block jscontent%}
-
 {%endblock%}
-
