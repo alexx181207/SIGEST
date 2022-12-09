@@ -226,8 +226,6 @@ def loggin(request):
 
 
 def user_login(request):
-    modelComercial = None
-    modelTaller = None
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -239,14 +237,6 @@ def user_login(request):
                     messages.add_message(
                         request, messages.INFO, "Usuario autenticado satisfactoriamente"
                     )
-                    if user.has_perm("Taller.add_ordenprimaria"):
-                        comercial_user = True
-                    else:
-                        comercial_user = False
-                    if user.has_perm("Taller.add_ordenhistorico"):
-                        taller_user = True
-                    else:
-                        taller_user = False
                     Orden = OrdenPrimaria.objects.filter(
                         centro=request.user.trabajador.centro
                     ).filter(cerrada=False)
@@ -316,8 +306,6 @@ def user_login(request):
                             "cant_pend_tb": cant_pend_tb,
                             "cant_rep_tb": cant_rep_tb,
                             "cant_irrep_tb": cant_irrep_tb,
-                            "comercial_user": comercial_user,
-                            "taller_user": taller_user,
                             "totalDefec": totalDefec,
                             "totalPend": totalPend,
                             "totalReparado": totalReparado,
@@ -325,13 +313,6 @@ def user_login(request):
                             "form": form,
                         },
                     )
-            else:
-                messages.add_message(
-                    request,
-                    messages.INFO,
-                    "Sus credenciales no son válidas, si no recuerda su contraseña contacte con el administrador",
-                )
-                form = LoginForm()
     else:
         form = LoginForm()
     return render(request, "Authentication/login.html", {"form": form})
