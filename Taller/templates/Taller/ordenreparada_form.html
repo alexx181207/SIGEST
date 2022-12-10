@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-
 {% load static%}
-
 {%block stylecontent%}
 <!-- Datatables -->
 <link href="{% static 'css/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
@@ -9,210 +7,191 @@
 <link href="{% static 'css/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
-
-
 <link rel="stylesheet" href="{% static 'css/stylesnew.css' %}">
-
 {%endblock%}
-
-
 {% block content %}
- 
 <!-- page content -->
-
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel pagenew-div">
-          <div class="x_title">
-            <h2>Actualizar Reparación</h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
-                  </li>
-                  <li><a href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <div class="x_content">
-            <form action = "" method="post">
-              {%csrf_token%} 
-                                                             
-                <div class=" col-sm-4">
-                  <div class="form-group">
-                  <label >Acción de Reparación<span class="required"></span>
-                  </label>
-                  <input type="text" name="accion_reparacion" id="id_accion_reparacion" required="required" class="form-control col-md-7 col-xs-12 forms-input">
-                </div>
-              </div>
-                <div class="col-sm-3">
-                  <div class="form-group">
-                  <label>Nuevo Estado<span class="required"></span>
-                  </label>
-                  <select class="select2_single form-control forms-input" required="required" name="estado" required id="id_estado" >      
-                    <option value="" selected>             </option>
-                      {%for estado in estado %}
-                      <option value="{{estado.pk}}">{{estado.nombre}}</option>
-                       {%endfor%}
-                  </select>
-                </div>
-              </div>
-                <div class="col-sm-3">
-                  <div class="form-group">
-                  <label>Tipo Mano de Obra<span class="required"></span>
-                  </label>
-                  <select class="select2_single form-control forms-input" required="required" name="mano_obra" id="id_mano_obra" >      
-                    <option value="" selected>             </option>
-                      {%for mano_obra in mano_obra %}
-                      <option value="{{mano_obra.pk}}">{{mano_obra.tipo}}</option>
-                       {%endfor%}
-                  </select>
-                </div>
-              </div>
-                <div class="col-sm-2">
-                  <div class="form-group">
-                    <label>Recursos</label>
-                      <br>
-                  <button type="button" id="agregar" class="btn btn-primary"><i class="fa fa-plus" ></i></button>
-                  <button type="button" id="restar" class="btn btn-warning"><i class="fa fa-minus" ></i></button>
-                </div>
-              </div>
-              <div class="col-sm-10">
-                <div class="form-group">
-                  <label></label>
-                    <br>
-                </div>
-              </div>
-              <div class="col-sm-2">
-                <div class="form-group">
-                  
-                    <br>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-save" > Guardar</i></button>
-              </div>
-            </div>
-              </form>
-              </div>
-          </div>
-        </div>
-    </div>
-
-      <div class="row" id="formul">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel pagenew-div">
             <div class="x_title">
-              <h2>Consumo de Recursos</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
-                    </li>
-                    <li><a href="#">Settings 2</a>
-                    </li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-              <form action = "" method="post">
-                {%csrf_token%} 
-                <div class="col-sm-5">
-                  <div class="form-group">
-                  <label>Descripción<span class="required"></span>
-                  </label>
-                  <select class="select2_single form-control forms-input" required="required" name="cantidad" id="descripcion" >      
-                    <option value="" selected>             </option>
-                      {%for recursos in recursos %}
-                      <option value="{{recursos.descripcion}}">{{recursos.descripcion}}</option>
-                       {%endfor%}
-                  </select>
-                </div>
-              </div>                                          
-                  <div class=" col-sm-2">
-                    <div class="form-group">
-                    <label >Cantidad<span class="required"></span>
-                    </label>
-                    <input class="form-control forms-input type="number" name="number" id="cantidad" required="required" >
-                  </div>
-                </div>
-
-                  <div class="col-sm-2">
-                    <div class="form-group">
-                      <label>Consumir</label>
-                        <br>
-                    <button type="button" id="consumir" class="btn btn-primary"><i class="fa fa-save" ></i></button>
-                    
-                  </div>
-                </div>
-                </form>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="row" hidden="hidden" id="tabla">
-          <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel pagenew-div">
-              <div class="x_title">
-                <h2>Listado de Recursos</h2>
+                <h2>Actualizar Reparación</h2>
                 <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
                 </ul>
                 <div class="clearfix"></div>
-              </div>
-              <div class="x_content">
-                <table id="example" class="table table-bordered table-striped">
-                  <thead>
-                  <tr class="headings">
-                    <th>Código</th>
-                    <th>Descripción</th>
-                    <th>Fecha Consumo</th>
-                    <th>Cantidad</th>  
-                    <th>Precio</th>      
-                    <th>Importe</th>              
-                  </tr>
-                  </thead>
-                  
-                  <tbody>
-  
-                  </tbody>              
-        </table>
-              </div>
             </div>
-          </div>
+            <div class="x_content">
+                <form action="" method="post">
+                    {%csrf_token%}
+                    <div class=" col-sm-4">
+                        <div class="form-group">
+                            <label>Acción de Reparación<span class="required"></span>
+                            </label>
+                            <input type="text" name="accion_reparacion" id="id_accion_reparacion" required="required" class="form-control col-md-7 col-xs-12 forms-input">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Nuevo Estado<span class="required"></span>
+                            </label>
+                            <select class="select2_single form-control forms-input" required="required" name="estado" required id="id_estado">
+                                <option value="" selected> </option>
+                                {%for estado in estado %}
+                                <option value="{{estado.pk}}">{{estado.nombre}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Tipo Mano de Obra<span class="required"></span>
+                            </label>
+                            <select class="select2_single form-control forms-input" required="required" name="mano_obra" id="id_mano_obra">
+                                <option value="" selected> </option>
+                                {%for mano_obra in mano_obra %}
+                                <option value="{{mano_obra.pk}}">{{mano_obra.tipo}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label>Recursos</label>
+                            <br>
+                            <button type="button" id="agregar" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+                            <button type="button" id="restar" class="btn btn-warning"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="form-group">
+                            <label></label>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <br>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"> Guardar</i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
+    </div>
+</div>
+<div class="row" id="formul">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel pagenew-div">
+            <div class="x_title">
+                <h2>Consumo de Recursos</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <form action="" method="post">
+                    {%csrf_token%}
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label>Descripción<span class="required"></span>
+                            </label>
+                            <select class="select2_single form-control forms-input" required="required" name="cantidad" id="descripcion">
+                                <option value="" selected> </option>
+                                {%for recursos in recursos %}
+                                <option value="{{recursos.descripcion}}">{{recursos.descripcion}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class=" col-sm-2">
+                        <div class="form-group">
+                            <label>Cantidad<span class="required"></span>
+                            </label>
+                            <input class="form-control forms-input type=" number" name="number" id="cantidad" required="required">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label>Consumir</label>
+                            <br>
+                            <button type="button" id="consumir" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" hidden="hidden" id="tabla">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel pagenew-div">
+            <div class="x_title">
+                <h2>Listado de Recursos</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="headings">
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Fecha Consumo</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Importe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- /page content -->
-
-
 {% endblock %}
-
-
 {%block jscontent%}
-
 <script src="{% static 'js/csrftoken.js' %}"></script>
 <script src="{% static 'css/vendors/validator/validator.js' %}"></script>
 <!-- Datatables -->
@@ -232,91 +211,87 @@
 <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
 <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
 <script src="{% static 'css/csrftoken.js' %}"></script>
+<script>
+$('#formul').hide();
+$('#restar').hide();
+
+$("#agregar").click(function(event) {
+    $('#formul').fadeIn(2000).show();
+    $('#agregar').fadeOut(2000).hide();
+    $('#restar').fadeIn(1000).show();
+});
+
+$("#restar").click(function(event) {
+    $('#formul').fadeOut(2000).hide();
+    $('#agregar').fadeIn(1000).show();
+    $('#restar').fadeOut(2000).hide();
+
+});
+
+$("#descripcion").change(function(e) {
+    var descripcion = e.target.value;
+    $("#descripcion").data("midescripcion", descripcion);
+});
+$("#cantidad").change(function(e) {
+    var cantidad = e.target.value;
+    $("#cantidad").data("micantidad", cantidad);
+});
+
+var tabla = $('#example').DataTable({
+    "paging": false,
+    "lengthChange": true,
+    "responsive": true,
+    "searching": false,
+    "ordering": false,
+    "info": false,
+    "autoWidth": false,
+    "ajax": {
+        "url": "{%url 'recursos_consumidos' %}",
+        "dataSrc": "data_set"
+    },
+    "columns": [
+        { "data": "codigo_sap" },
+        { "data": "descripcion" },
+        { "data": "fecha" },
+        { "data": "cantidad" },
+        { "data": "precio" },
+        { "data": "importe" }
+    ]
+});
+
+$("#consumir").click(function(event) {
+    $('#agregar').fadeIn(1000).show();
+    $('#restar').fadeOut(2000).hide();
+    var descripcion = $('#descripcion').data("midescripcion");
+    var cantidad = $('#cantidad').data("micantidad");
+    update(descripcion, cantidad);
+});
 
 
-<script >
-  
-    $('#formul').hide();
-    $('#restar').hide();
-    
-    $("#agregar").click(function(event){
-      $('#formul').fadeIn(2000).show();
-      $('#agregar').fadeOut(2000).hide();
-      $('#restar').fadeIn(1000).show();
+function update(descripcion, cantidad) {
+    datos = { 'descripcion': descripcion, 'cantidad': cantidad };
+    $.ajax({
+        url: "{%url 'agregar_consumo_recurso' %}",
+        type: "POST",
+        dataType: "json",
+        data: {
+            data: JSON.stringify(datos)
+        },
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        success: function(result) {
+            if (result) {
+                $("#formul").hide("slow")
+                tabla.ajax.url('/recursos/consumidos/');
+                tabla.ajax.reload();
+                $('#tabla').show(1000);
+                make_box(result.data);
+            }
+        },
     });
-
-    $("#restar").click(function(event){
-      $('#formul').fadeOut(2000).hide();
-      $('#agregar').fadeIn(1000).show();
-      $('#restar').fadeOut(2000).hide();
-      
-    });
-
-    $("#descripcion").change(function(e){
-        var descripcion = e.target.value;
-        $("#descripcion").data("midescripcion", descripcion);
-       });
-      $("#cantidad").change(function(e){
-        var cantidad=e.target.value;
-        $("#cantidad").data("micantidad", cantidad);
-      });
-
-      var tabla= $('#example').DataTable({
-                       "paging":false,
-                       "lengthChange":true,
-                        "responsive":true,
-                         "searching":false,
-                         "ordering":false,
-                         "info":false,
-                         "autoWidth":false,
-                         "ajax": {
-                        "url": "{%url 'recursos_consumidos' %}",
-                        "dataSrc": "data_set"
-                      },
-                       "columns": [
-                       {"data": "codigo_sap"},
-                       {"data": "descripcion"},
-                       {"data": "fecha"},
-                       {"data": "cantidad"},
-                       {"data": "precio"},
-                       {"data": "importe"}
-                       ]});
-
-      $("#consumir").click(function(event){
-        $('#agregar').fadeIn(1000).show();
-        $('#restar').fadeOut(2000).hide();
-        var descripcion= $('#descripcion').data("midescripcion");
-        var cantidad= $('#cantidad').data("micantidad");
-        update(descripcion, cantidad);  
-        });
-
-  
-   function update(descripcion, cantidad) {
-      datos = {'descripcion': descripcion, 'cantidad': cantidad};
-            $.ajax({
-                url: "{%url 'agregar_consumo_recurso' %}",
-                type: "POST",
-                dataType: "json",
-              data: {
-                    data: JSON.stringify(datos)
-                },
-                beforeSend: function (xhr, settings) {
-                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                    }
-                },
-                success: function (result) {
-                    if (result) {
-                        $("#formul").hide("slow")
-                        tabla.ajax.url('/recursos/consumidos/');
-                        tabla.ajax.reload();
-                        $('#tabla').show(1000);
-                        make_box(result.data);
-                    }
-                },
-            });
-        };
-
+};
 </script>
-
 {% endblock %}

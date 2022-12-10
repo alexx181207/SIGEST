@@ -13,30 +13,16 @@ from .models import (
     ManoObra,
     Consumo_Recursos,
 )
-
-# from braces.views import PermissionRequiredMixin
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
-
-# from django.contrib.auth.models import User
 from django.urls import reverse_lazy
-
-# from django.forms import ModelForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-
-# from django.template import Context
-# from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
-
-# from django.views.generic.base import TemplateResponseMixin, View
-# from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
-# from django.views.generic.list import ListView
 from django.views.generic.base import View, TemplateView
 from .files_views import render_to_pdf
 import datetime
@@ -132,6 +118,10 @@ class Index(BaseDatosMixin, TemplateView):
             .filter(estado=get_object_or_404(Estado, pk=2))
             .count()
         )
+        totalDefec = cant_defec_tfa + cant_defec_tb
+        totalPend = cant_pend_tfa + cant_pend_tb
+        totalReparado = cant_rep_tfa + cant_rep_tb
+        totalIrrep = cant_irrep_tb + cant_irrep_tfa
         context["cant_defec_tfa"] = cant_defec_tfa
         context["cant_rep_tfa"] = cant_rep_tfa
         context["cant_irrep_tfa"] = cant_irrep_tfa
@@ -140,6 +130,10 @@ class Index(BaseDatosMixin, TemplateView):
         context["cant_rep_tb"] = cant_rep_tb
         context["cant_irrep_tb"] = cant_irrep_tb
         context["cant_pend_tb"] = cant_pend_tb
+        context["totalDefec"] = totalDefec
+        context["totalPend"] = totalPend
+        context["totalReparado"] = totalReparado
+        context["totalIrrep"] = totalIrrep
         return context
 
 
@@ -232,8 +226,6 @@ def loggin(request):
 
 
 def user_login(request):
-    modelComercial = None
-    modelTaller = None
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -245,14 +237,6 @@ def user_login(request):
                     messages.add_message(
                         request, messages.INFO, "Usuario autenticado satisfactoriamente"
                     )
-                    if user.has_perm("Taller.add_ordenprimaria"):
-                        comercial_user = True
-                    else:
-                        comercial_user = False
-                    if user.has_perm("Taller.add_ordenhistorico"):
-                        taller_user = True
-                    else:
-                        taller_user = False
                     Orden = OrdenPrimaria.objects.filter(
                         centro=request.user.trabajador.centro
                     ).filter(cerrada=False)
@@ -302,34 +286,33 @@ def user_login(request):
                         .filter(estado=get_object_or_404(Estado, pk=4))
                         .count()
                     )
-                return render(
-                    request,
-                    "Miscelaneos/index.html",
-                    {
-                        "cantidad": cantidad,
-                        "modelComercial": modelComercial,
-                        "cantidad1": cantidad1,
-                        "modelTaller": modelTaller,
-                        "cant_defec_tfa": cant_defec_tfa,
-                        "cant_pend_tfa": cant_pend_tfa,
-                        "cant_rep_tfa": cant_rep_tfa,
-                        "cant_irrep_tfa": cant_irrep_tfa,
-                        "cant_defec_tb": cant_defec_tb,
-                        "cant_pend_tb": cant_pend_tb,
-                        "cant_rep_tb": cant_rep_tb,
-                        "cant_irrep_tb": cant_irrep_tb,
-                        "comercial_user": comercial_user,
-                        "taller_user": taller_user,
-                        "form": form,
-                    },
-                )
-            else:
-                messages.add_message(
-                    request,
-                    messages.INFO,
-                    "Sus credenciales no son válidas, si no recuerda su contraseña contacte con el administrador",
-                )
-                form = LoginForm()
+                    totalDefec = cant_defec_tfa + cant_defec_tb
+                    totalPend = cant_pend_tfa + cant_pend_tb
+                    totalReparado = cant_rep_tfa + cant_rep_tb
+                    totalIrrep = cant_irrep_tb + cant_irrep_tfa
+                    return render(
+                        request,
+                        "Miscelaneos/index.html",
+                        {
+                            "cantidad": cantidad,
+                            "modelComercial": modelComercial,
+                            "cantidad1": cantidad1,
+                            "modelTaller": modelTaller,
+                            "cant_defec_tfa": cant_defec_tfa,
+                            "cant_pend_tfa": cant_pend_tfa,
+                            "cant_rep_tfa": cant_rep_tfa,
+                            "cant_irrep_tfa": cant_irrep_tfa,
+                            "cant_defec_tb": cant_defec_tb,
+                            "cant_pend_tb": cant_pend_tb,
+                            "cant_rep_tb": cant_rep_tb,
+                            "cant_irrep_tb": cant_irrep_tb,
+                            "totalDefec": totalDefec,
+                            "totalPend": totalPend,
+                            "totalReparado": totalReparado,
+                            "totalIrrep": totalIrrep,
+                            "form": form,
+                        },
+                    )
     else:
         form = LoginForm()
     return render(request, "Authentication/login.html", {"form": form})
@@ -415,7 +398,7 @@ class CrearOrden(BaseDatosMixin, PermissionRequiredMixin, CreateView):
     template_name = "Comercial/ordenprimaria_form.html"
     # success_url = render_to_pdf(request, 'orden/orden_trabajo.html',{'modelact': modelact})
     success_url = reverse_lazy("pdf_orden")
-    permission_required = "Comercial.add_ordenprimaria"
+    permission_required = "Taller.add_ordenprimaria"
     fields = [
         "prefijo",
         "servicio",
@@ -535,11 +518,12 @@ class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         self.object = form.save()
         return super(RepararOrden, self).form_valid(form)
 
+
 class UpdateOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    model=OrdenPrimaria
+    model = OrdenPrimaria
     template_name = "Comercial/ordenprimaria_form.html"
     success_url = reverse_lazy("list_updates")
-    permission_required = "Comercial.add_ordenprimaria"
+    permission_required = "Taller.add_ordenprimaria"
 
     fields = [
         "prefijo",
@@ -574,19 +558,18 @@ class UpdateOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         return super(UpdateOrder, self).dispatch(request, *args, **kwargs)
 
 
-
 class DeleteOrder(BaseDatosMixin, PermissionRequiredMixin, DeleteView):
-    model=OrdenPrimaria
-    template_name="Comercial/delete_order.html"
+    model = OrdenPrimaria
+    template_name = "Comercial/delete_order.html"
     success_url = reverse_lazy("list_updates")
-    permission_required = "Comercial.add_ordenprimaria"
+    permission_required = "Taller.add_ordenprimaria"
 
 
 class CerrarOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
     model = OrdenPrimaria
     success_url = reverse_lazy("ordenes_reparadas")
     template_name = "Comercial/ordencerrada_form.html"
-    permission_required = "Comercial.add_ordenprimaria"
+    permission_required = "Taller.add_ordenprimaria"
     fields = ["nombre_cliente_recibe", "direccion_cliente_recibe", "ci_cliente_recibe"]
 
     @method_decorator(login_required)
@@ -627,7 +610,7 @@ class OrdenLlamada(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
     model = OrdenPrimaria
     success_url = reverse_lazy("gestion_telefono")
     template_name = "Comercial/ordenllamada_form.html"
-    permission_required = "Comercial.add_ordenprimaria"
+    permission_required = "Taller.add_ordenprimaria"
     fields = ["nombre_cliente"]
 
     @method_decorator(login_required)

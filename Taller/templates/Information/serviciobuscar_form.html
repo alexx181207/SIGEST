@@ -1,18 +1,11 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {%block stylecontent%}
-
-
 <link rel="stylesheet" href="{% static 'css/stylesnew.css' %}">
-
-
 <!-- bootstrap-daterangepicker -->
 <link href="{% static 'css/vendors/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
 <!-- bootstrap-datetimepicker -->
 <link href="{% static 'css/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css' %}" rel="stylesheet">
-
 <!-- Datatables -->
 <link href="{% static 'css/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
@@ -20,162 +13,142 @@
 <link href="{% static 'css/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
 {%endblock%}
-
-
-
 {% block content %}
-
 <!-- page content -->
-
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          <div class="x_title pagenew-div">
-            <h2>Buscar Servicio</h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-              </li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a>
-                  </li>
-                  <li><a href="#">Settings 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a>
-              </li>
-            </ul>
-            <div class="clearfix"></div>
-          </div>
-          <form action = "" method="post">
-            {%csrf_token%}
-          <div class="x_content">
-            <div class="col-sm-1">
-            <div class="form-group">                                               
-                <label >Prefijo <span class="required"></span>
-                </label>
-                <select class="select2_single form-control forms-input"  name="t" id="prefijo">      
-                  <option value="" selected>             </option>
-                    {%for prefijo in prefijo %}
-                    <option value="{{prefijo.nombre}}">{{prefijo.nombre}}</option>
-                     {%endfor%}
-                </select>
-              </div>
-            </div>
-              <div class="col-sm-3">
-                <div class="form-group">
-                <label>Servicio <span class="required"></span>
-                </label>
-                <input type="text" id="servicio" name="q" required="required" class="form-control col-md-7 col-xs-12 forms-input">
-              </div>
-            </div>
-              <div class="col-sm-3">
-                <div class="form-group">
-                <label>Fecha inicial <span class="required"></span>
-                </label>
-                <div class='input-group date' id='myDatepicker'>
-                  <input type="text" class="form-control forms-input" name="p" id="data1" required="required" />
-                  <span class="input-group-addon">
-                     <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-              </div>
-            </div>
-              <div class="col-sm-3">
-                <div class="form-group">
-                <label>Fecha final<span class="required"></span>
-                </label>
-                <div class='input-group date' id='myDatepicker2'>
-                  <input type="text" class="form-control forms-input name="r" id='data2' required="required" />
-                  <span class="input-group-addon">
-                     <span class="glyphicon glyphicon-calendar"></span>
-                  </span>
-              </div>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <br>
-            <button type="button" id="btn"  class="btn btn-primary" style="margin-top: 5px;">
-              <span class="fa big-icon fa-save"></span>
-               </button>
-              </div>
-            </div>
-            </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="row" id="tabla">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel pagenew-div">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel pagenew-div">
             <div class="x_title">
-              <h2>Histórico</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
+                <h2>Buscar Servicio</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li><a href="#">Settings 2</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
                     </li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <form action="" method="post">
+                {%csrf_token%}
+                <div class="x_content">
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <label>Prefijo <span class="required"></span>
+                            </label>
+                            <select class="select2_single form-control forms-input" name="t" id="prefijo">
+                                <option value="" selected> </option>
+                                {%for prefijo in prefijo %}
+                                <option value="{{prefijo.nombre}}">{{prefijo.nombre}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Servicio <span class="required"></span>
+                            </label>
+                            <input type="text" id="servicio" name="q" required="required" class="form-control col-md-7 col-xs-12 forms-input">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Fecha inicial <span class="required"></span>
+                            </label>
+                            <div class='input-group date' id='myDatepicker'>
+                                <input type="text" class="form-control forms-input" name="p" id="data1" required="required" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Fecha final<span class="required"></span>
+                            </label>
+                            <div class='input-group date' id='myDatepicker2'>
+                                <input type="text" class="form-control forms-input name=" r" id='data2' required="required" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <br>
+                            <button type="button" id="btn" class="btn btn-primary" style="margin-top: 5px;">
+                                <span class="fa big-icon fa-save"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row" id="tabla">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel pagenew-div">
+            <div class="x_title">
+                <h2>Histórico</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
             </div>
             <div class="x_content">
-              <table id="example" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Orden</th>
-                  <th>Servicio</th>
-                  <th>Fecha Creacion</th>
-                  <th>Modelo</th>              
-                  <th>Serie</th>
-                  <th>Accion Reparación</th>
-                  <th>Estado</th>                
-                </tr>
-                </thead>
-                
-                <tbody>
-
-                </tbody>              
-              </table>
+                <table id="example" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Orden</th>
+                            <th>Servicio</th>
+                            <th>Fecha Creacion</th>
+                            <th>Modelo</th>
+                            <th>Serie</th>
+                            <th>Accion Reparación</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 <!-- /page content -->
- 
-
-                 
 {% endblock %}
-
-
-
-
 {%block jscontent%}
-
-
 <!-- bootstrap-daterangepicker -->
 <script src="{% static 'css/vendors/moment/min/moment.min.js' %}"></script>
 <script src="{% static 'css/vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
-    <!-- bootstrap-datetimepicker -->    
+<!-- bootstrap-datetimepicker -->
 <script src="{% static 'css/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
-
-
 <!-- Datatables -->
 <script src="{% static 'css/vendors/datatables.net/js/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
-
 <script src="{% static 'css/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
@@ -185,71 +158,64 @@
 <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
 <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
 <script src="{% static 'js/csrftoken.js' %}"></script>
-
-
-
 <script type="text/javascript">
-
 $("#myDatepicker").datetimepicker({
-      format:'MM/DD/YYYY'
-    });
-
- $("#myDatepicker2").datetimepicker({
-  format:'MM/DD/YYYY'
+    format: 'MM/DD/YYYY'
 });
 
-  $('#tabla').hide("slow");
-</script>
+$("#myDatepicker2").datetimepicker({
+    format: 'MM/DD/YYYY'
+});
 
+$('#tabla').hide("slow");
+</script>
 <script type="text/javascript">
- 
- $('#data1').attr("value", function(indiceArray){
+$('#data1').attr("value", function(indiceArray) {
     var temp = new Date()
-    var f= moment().subtract(temp.getDate()-1, 'days').format('MM/DD/YYYY');
+    var f = moment().subtract(temp.getDate() - 1, 'days').format('MM/DD/YYYY');
     $("#data1").data("mifechainicio", f);
     return f
-  })
+})
 
-  $('#data2').attr("value", function(indiceArray){
-    var f1= moment().format('MM/DD/YYYY');
+$('#data2').attr("value", function(indiceArray) {
+    var f1 = moment().format('MM/DD/YYYY');
     $("#data2").data("mifechafin", f1);
     return f1
-  });
+});
 </script>
-
 <script>
-  var tabla= $('#example').DataTable({
-      "paging":true,
-      "lengthChange":true,
-      "responsive":true,
-      "searching":true,
-      "ordering":true,
-      "info":true,
-      "autoWidth":false,
-      "ajax": {
-          "url": "{%url 'servicio_encontrar' %}",
-          "dataSrc": "data_set"
-      },
-      "columns": [
-          {"data": "No_orden"},
-          {"data": "servicio"},
-          {"data": "fecha_creacion"},
-          {"data": "modelo"},
-          {"data": "serie"},
-          {"data": "accion_reparacion"},
-          {"data": "estado"}
-      ]});
+var tabla = $('#example').DataTable({
+    "paging": true,
+    "lengthChange": true,
+    "responsive": true,
+    "searching": true,
+    "ordering": true,
+    "info": true,
+    "autoWidth": false,
+    "ajax": {
+        "url": "{%url 'servicio_encontrar' %}",
+        "dataSrc": "data_set"
+    },
+    "columns": [
+        { "data": "No_orden" },
+        { "data": "servicio" },
+        { "data": "fecha_creacion" },
+        { "data": "modelo" },
+        { "data": "serie" },
+        { "data": "accion_reparacion" },
+        { "data": "estado" }
+    ]
+});
 </script>
-
 <script>
-      $("#btn").click(function(event){
-        var prefijo= $('#prefijo').val();
-        var servicio= $('#servicio').val();
-        var fechainicio= $("#data1").val();
-        var fechafin=$("#data2").val();  
-        tabla.ajax.url('/buscar/servicio/ajax/' + prefijo + '/' + servicio + '/' + fechainicio + '-' + fechafin + '/');
-        tabla.ajax.reload(); 
-        $('#tabla').fadeIn(2000).show();               
-   });
-   </script>
+$("#btn").click(function(event) {
+    var prefijo = $('#prefijo').val();
+    var servicio = $('#servicio').val();
+    var fechainicio = $("#data1").val();
+    var fechafin = $("#data2").val();
+    tabla.ajax.url('/buscar/servicio/ajax/' + prefijo + '/' + servicio + '/' + fechainicio + '-' + fechafin + '/');
+    tabla.ajax.reload();
+    $('#tabla').fadeIn(2000).show();
+});
+</script>
 {% endblock %}

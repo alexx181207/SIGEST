@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
-
-
- 
-
 {%block stylecontent%}
-
-
-
 <link href="{% static 'css/vendors/google-code-prettify/bin/prettify.min.css' %}" rel="stylesheet">
 <!-- Select2 -->
 <link href="{% static 'css/vendors/select2/dist/css/select2.min.css' %}" rel="stylesheet">
@@ -24,237 +16,200 @@
 <link href="{% static 'css/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css' %}" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/stylesnew.css' %}" />
 {%endblock%}
-
-
-  {% block content %} 
-
- 
-  <form class="form-horizontal form-label-left" action="" name="informacion" method="post" >
-    {%csrf_token%} 
-                      <div class="row" >
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                          <div class="x_panel pagenew-div">
-                            <div class="x_title">
-                              <h2>Datos Orden <small>de servicio</small></h2>
-                              <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+{% block content %}
+<form class="form-horizontal form-label-left" action="" name="informacion" method="post">
+    {%csrf_token%}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel pagenew-div">
+                <div class="x_title">
+                    <h2>Datos Orden <small>de servicio</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
                                 </li>
-                                <li class="dropdown">
-                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                  <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#">Settings 1</a>
-                                    </li>
-                                    <li><a href="#">Settings 2</a>
-                                    </li>
-                                  </ul>
+                                <li><a href="#">Settings 2</a>
                                 </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                              </ul>
-                              <div class="clearfix"></div>
-                            </div>
-                           
-                            <div class="x_content" >
-                              <!-- Smart Wizard -->
-                              
-                                    <div class="form-group">                                               
-                                      <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <label class="control-label col-md-1 col-sm-3 col-xs-12" >Prefijo <span class="required"></span>
-                                        </label>
-                                        <select class="select2_single form-control forms-input"  name="prefijo" id="id_prefijo" required="required"> 
-                                          <option value="" selected>             </option>     
-                                            {%for prefijo in prefijo %}
-                                            {%if prefijo.nombre == object.prefijo.nombre%}
-                                            <option value="{{prefijo.pk}}" selected>{{prefijo.nombre}}</option>
-                                            {%else%}
-                                            <option value="{{prefijo.pk}}">{{prefijo.nombre}}</option>
-                                            {%endif%}
-                                             {%endfor%}
-                                        </select>
-                                      </div>
-                                      <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <label class="control-label col-md-2 col-sm-3 col-xs-12" >Servicio <span class="required" ></span>
-                                        </label>
-                                        <input type="text" id="id_servicio" name="servicio" required="required" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.servicio}}">
-                                      </div>
-                                      <div class="col-md-3 col-sm-6 col-xs-12">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Modelo <span class="required"></span>
-                                        </label>
-                                        <select class="select2_single form-control forms-input" required="required" name="modelo" id="id_modelo" >      
-                                          <option value="" selected>             </option>
-                                            {%for modelo in mod %}
-                                            {%if modelo.tecnologia.nombre == object.tecnologia.nombre%}
-                                            <option value="{{modelo.pk}}" selected>{{modelo.nombre}}</option>
-                                            {%else%}
-                                            <option value="{{modelo.pk}}">{{modelo.nombre}}</option>
-                                            {%endif%}
-                                             {%endfor%}
-                                      
-                                        </select>
-                                      </div>
-                                      <div class="col-md-3 col-sm-6 col-xs-12">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Serie <span class="required"></span>
-                                        </label>
-                                        <input type="text" id="id_serie" name="serie" required="required" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.serie}}">
-                                      </div>
-                                      <div class="col-md-2 col-sm-6 col-xs-12">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >Garantía 
-                                        </label>
-                                        <select class="select2_single form-control forms-input" name="garantia" id="id_garantia" required="required" value="{{object.garantia}}">      
-                                          <option value="{{object.pk}}" selected>{{object.garantia}}</option>
-                                            <option >SI</option>
-                                            <option >NO</option>
-                                        </select>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-3" >
-                                    <div class="form-group">  
-                                          <label >Venc. Garantía <span class="required"></span>
-                                          </label>
-                                          <div class='input-group date' id='myDatepicker'>
-                                          <input type="text" class="form-control forms-input" name="fecha_vencimiento_garantia" id="id_fecha_vencimiento_garantia" value="{{object.fecha_vencimiento_garantia}}"/>
-                                          <span class="input-group-addon">
-                                             <span class="glyphicon glyphicon-calendar"></span>
-                                          </span>
-                                      </div>
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                      <div class="form-group"> 
-                                        <label >Folio <span class="required"></span>
-                                        </label>
-                                        <input type="text" id="id_folio_venta" name="folio_venta" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.folio_venta}}">
-                                      </div>
-                                      </div>
-                                      <div class="col-sm-3">
-                                        <div class="form-group">
-                                        <label >Fecha Venta <span class="required"></span>
-                                        </label>
-                                        <div class='input-group date' id='myDatepicker2'> 
-                                        <input type="text" class="form-control forms-input" name="fecha_venta" id="id_fecha_venta" value="{{object.fecha_venta}}"/>
-                                        <span class="input-group-addon">
-                                           <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                      <div class="form-group">
-                                      <label >Defectos<span class="required"></span>
-                                      </label>
-                                      <select class="select2_multiple form-control forms-input" multiple="multiple" required="required" name="defecto" id="id_defecto">      
-                                        <option value="" selected>             </option>
-                                          {%for defecto in defec %}
-                                          <option value="{{defecto.pk}}">{{defecto.nombre}}</option>
-                                           {%endfor%}
-                                      </select>
-                                    </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                    <div class="form-group">
-                                      <label >Observaciones</label>
-                                     <textarea class="resizable_textarea form-control forms-input" name="observaciones" id="id_observaciones" value="{{object.observaciones}}"></textarea>
-                                    </div>                             
-                                  </div>
-                                    <div class="col-sm-3">
-                                      <div class="form-group"> 
-                                      <label >Nombre del cliente <span class="required"></span>
-                                      </label>
-                                      <input type="text" class="form-control forms-input" id="id_nombre_cliente_entrega"  name="nombre_cliente_entrega"  required="required" value="{{object.nombre_cliente_entrega}}">
-                                    </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                    <div class="form-group">
-                                      <label >Dirección Particular <span class="required"></span>
-                                      </label>
-                                        <input type="text" class="form-control forms-input" name="direccion_cliente_entrega" id="id_direccion_cliente_entrega" required="required" value="{{object.direccion_cliente_entrega}}">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-3">
-                                    <div class="form-group">
-                                      <label >CI del cliente<span class="required"></span>
-                                      </label>
-                                        <input type="text" class="form-control forms-input" name="ci_cliente_entrega" id="id_ci_cliente_entrega" required="required" value="{{object.ci_cliente_entrega}}">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-3">
-                                    <div class="form-group">
-                                      <label >Contacto Telefónico<span class="required"></span>
-                                      </label>
-                                        <input type="text" class="form-control forms-input" name="contacto_telefono" id="id_contacto_telefono" required="required" value="{{object.contacto_telefono}}">
-                                    </div>
-                                  </div>
-                                  <div class="col-sm-2">
-                                    <div class="form-group">
-                                  <div class="checkbox">
-                                    <label>
-                                      <input type="checkbox" class="flat form-control"  name="propietario" id="id_propietario" {%if object.propietario%} checked="checked" {%endif%}>
-                                      <strong>Propietario</strong>
-                                    </label>
-                                  </div>
-                                </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <div class="col-sm-11"></div>
-                                    <div class="col-sm-1">
-                                  <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                              </div>
-                            
-                              </div>
-                          
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <!-- Smart Wizard -->
+                    <div class="form-group">
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-1 col-sm-3 col-xs-12">Prefijo <span class="required"></span>
+                            </label>
+                            <select class="select2_single form-control forms-input" name="prefijo" id="id_prefijo" required="required">
+                                <option value="" selected> </option>
+                                {%for prefijo in prefijo %}
+                                {%if prefijo.nombre == object.prefijo.nombre%}
+                                <option value="{{prefijo.pk}}" selected>{{prefijo.nombre}}</option>
+                                {%else%}
+                                <option value="{{prefijo.pk}}">{{prefijo.nombre}}</option>
+                                {%endif%}
+                                {%endfor%}
+                            </select>
                         </div>
-                      </div>
-                      </div>
-                    </form>
-    {%endblock%}
-
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-2 col-sm-3 col-xs-12">Servicio <span class="required"></span>
+                            </label>
+                            <input type="text" id="id_servicio" name="servicio" required="required" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.servicio}}">
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Modelo <span class="required"></span>
+                            </label>
+                            <select class="select2_single form-control forms-input" required="required" name="modelo" id="id_modelo">
+                                <option value="" selected> </option>
+                                {%for modelo in mod %}
+                                {%if modelo.tecnologia.nombre == object.tecnologia.nombre%}
+                                <option value="{{modelo.pk}}" selected>{{modelo.nombre}}</option>
+                                {%else%}
+                                <option value="{{modelo.pk}}">{{modelo.nombre}}</option>
+                                {%endif%}
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Serie <span class="required"></span>
+                            </label>
+                            <input type="text" id="id_serie" name="serie" required="required" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.serie}}">
+                        </div>
+                        <div class="col-md-2 col-sm-6 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Garantía
+                            </label>
+                            <select class="select2_single form-control forms-input" name="garantia" id="id_garantia" required="required" value="{{object.garantia}}">
+                                <option value="{{object.pk}}" selected>{{object.garantia}}</option>
+                                <option>SI</option>
+                                <option>NO</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Venc. Garantía <span class="required"></span>
+                            </label>
+                            <div class='input-group date' id='myDatepicker'>
+                                <input type="text" class="form-control forms-input" name="fecha_vencimiento_garantia" id="id_fecha_vencimiento_garantia" value="{{object.fecha_vencimiento_garantia}}" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Folio <span class="required"></span>
+                            </label>
+                            <input type="text" id="id_folio_venta" name="folio_venta" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.folio_venta}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Fecha Venta <span class="required"></span>
+                            </label>
+                            <div class='input-group date' id='myDatepicker2'>
+                                <input type="text" class="form-control forms-input" name="fecha_venta" id="id_fecha_venta" value="{{object.fecha_venta}}" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Defectos<span class="required"></span>
+                            </label>
+                            <select class="select2_multiple form-control forms-input" multiple="multiple" name="defecto" id="id_defecto" required="required">
+                                {%for defecto in defec %}
+                                <option value="{{defecto.pk}}">{{defecto.nombre}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Observaciones</label>
+                            <textarea class="resizable_textarea form-control forms-input" name="observaciones" id="id_observaciones" value="{{object.observaciones}}"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Nombre del cliente <span class="required"></span>
+                            </label>
+                            <input type="text" class="form-control forms-input" id="id_nombre_cliente_entrega" name="nombre_cliente_entrega" required="required" value="{{object.nombre_cliente_entrega}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Dirección Particular <span class="required"></span>
+                            </label>
+                            <input type="text" class="form-control forms-input" name="direccion_cliente_entrega" id="id_direccion_cliente_entrega" required="required" value="{{object.direccion_cliente_entrega}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>CI del cliente<span class="required"></span>
+                            </label>
+                            <input type="text" class="form-control forms-input" name="ci_cliente_entrega" id="id_ci_cliente_entrega" required="required" value="{{object.ci_cliente_entrega}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label>Contacto Telefónico<span class="required"></span>
+                            </label>
+                            <input type="text" class="form-control forms-input" name="contacto_telefono" id="id_contacto_telefono" required="required" value="{{object.contacto_telefono}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="flat form-control" name="propietario" id="id_propietario" {%if object.propietario%} checked="checked" {%endif%}>
+                                    <strong>Propietario</strong>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-11"></div>
+                        <div class="col-sm-1">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{%endblock%}
 {%block jscontent%}
-
-
 <script src="{% static 'js/csrftoken.js' %}"></script>
 <script src="{% static 'css/vendors/validator/validator.js' %}"></script>
-
 <!-- bootstrap-daterangepicker -->
 <script src="{% static 'css/vendors/moment/min/moment.min.js' %}"></script>
 <script src="{% static 'css/vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
-    <!-- bootstrap-datetimepicker -->    
+<!-- bootstrap-datetimepicker -->
 <script src="{% static 'css/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js' %}"></script>
 <!-- Select2 -->
 <script src="{% static 'css/vendors/select2/dist/js/select2.full.min.js' %}"></script>
 <!-- iCheck -->
 <script src="{% static 'css/vendors/iCheck/icheck.min.js' %}"></script>
-
 <script src="{% static 'css/vendors/moment/min/moment.min.js' %}"></script>
+<script>
+$("#myDatepicker").datetimepicker({
+    format: 'DD/MM/YYYY hh:mm:ss'
+});
 
-
-<script> 
-
-    $("#myDatepicker").datetimepicker({
-      format:'DD/MM/YYYY hh:mm:ss'
-    });
-
-    $("#myDatepicker2").datetimepicker({
-      format:'DD/MM/YYYY hh:mm:ss'
-    });
-
+$("#myDatepicker2").datetimepicker({
+    format: 'DD/MM/YYYY hh:mm:ss'
+});
 </script>
-
- {%endblock%}
-
-
-      
-      
-     
-   
-  
-   
-  
-
- 
- 
- 
- 
-
-
-
+{%endblock%}

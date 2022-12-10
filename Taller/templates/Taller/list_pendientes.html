@@ -1,11 +1,7 @@
 {% extends "base.html" %}
-
 {% load static%}
-
 {%block stylecontent%}
-
 <link rel="stylesheet" href="{% static 'css/stylesnew.css' %}">
-
 <!-- Datatables -->
 <link href="{% static 'css/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
@@ -13,32 +9,29 @@
 <link href="{% static 'css/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css' %}" rel="stylesheet">
 {%endblock%}
-
 {% block content %}
-
 <!-- page content -->
-
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-          <div class="x_panel pagenew-div">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel pagenew-div">
             <div class="x_title ">
-              <h2>Listado de Órdenes Pendientes</h2>
-              <ul class="nav navbar-right panel_toolbox">
-                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a>
+                <h2>Listado de Órdenes Pendientes</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                     </li>
-                    <li><a href="#">Settings 2</a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Settings 1</a>
+                            </li>
+                            <li><a href="#">Settings 2</a>
+                            </li>
+                        </ul>
                     </li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                </li>
-              </ul>
-              <div class="clearfix"></div>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <table id="tablalist" class="table table-bordered table-striped">
@@ -56,38 +49,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                      {%for model in object_list%}
+                        {%for model in object_list%}
                         <tr>
                             <td>{{model.No_orden}}</td>
                             <td>{{model.prefijo}}{{model.servicio}}</td>
                             <td>{{model.fecha_creacion}}</td>
                             <td>{{model.ordena}}</td>
                             <td>{{model.modelo.nombre}}</td>
-                            <td>{{model.modelo.tecnologia.nombre}}</td>                  
+                            <td>{{model.modelo.tecnologia.nombre}}</td>
                             <td>{{model.serie}}</td>
                             <td>{{model.estado}}</td>
                             <td>
-                                <form action = "{% url 'orden_lista_defectadas' model.id %}" method="get"> {%csrf_token%}
-                                <button type="submit" class="btn btn-success"><i class="fa fa-edit" ></i></button>
-                                 </form>
-                            </td>   
+                                <form action="{% url 'orden_lista_defectadas' model.id %}" method="get"> {%csrf_token%}
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-edit"></i></button>
+                                </form>
+                            </td>
                         </tr>
                         {%endfor%}
                     </tbody>
                 </table>
             </div>
-          </div>
         </div>
-      </div>
-
-  <!-- /page content -->
-
+    </div>
+</div>
+<!-- /page content -->
 {% endblock %}
-
-
-
 {%block jscontent%}
-
 <!-- Datatables -->
 <script src="{% static 'css/vendors/pdfmake/build/pdfmake.min.js' %}"></script>
 <script src="{% static 'css/vendors/pdfmake/build/vfs_fonts.js' %}"></script>
@@ -99,17 +86,9 @@
 <script src="{% static 'css/vendors/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
 <script src="{% static 'css/vendors/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
-
-
-
 <script src="{% static 'js/csrftoken.js' %}"></script>
 <script src="{% static 'js/table.js' %}"></script>
-
-
 <script>
-
-  createTable("#tablalist");
-  </script>
-
+createTable("#tablalist");
+</script>
 {%endblock%}
-

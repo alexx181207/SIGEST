@@ -2,22 +2,9 @@ from .models import OrdenPrimaria, OrdenHistorico, Prefijo, Consumo_Recursos, Re
 from .views import BaseDatosMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.base import TemplateView
-
-# from braces.views import PermissionRequiredMixin, CsrfExemptMixin, JsonRequestResponseMixin
-# from django.contrib import messages
-# from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
-# from django.contrib.auth.models import User
-# from django.urls import reverse_lazy
-# from django.forms import ModelForm
 from django.http import JsonResponse, HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404
-
-# from django.template.context import RequestContext
-# from django.utils.decorators import method_decorator
-# from django.views.generic.base import TemplateResponseMixin, View
-# from django.views.decorators.csrf import csrf_protect
 import datetime
 import json
 
@@ -30,17 +17,6 @@ class BuscarServicios(BaseDatosMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context["prefijo"] = Prefijo.objects.all()
         return context
-
-
-"""@login_required
-def BuscarServicios(request):
-    model=OrdenPrimaria.objects.filter(centro=request.user.trabajador.centro)
-    prefijo=Prefijo.objects.all()
-    modelComercial=OrdenPrimaria.objects.filter(centro=request.user.trabajador.centro).filter(confComercial=False)
-    cantidad=modelComercial.count()
-    modelTaller=OrdenPrimaria.objects.filter(centro=request.user.trabajador.centro).filter(confComercial=True).filter(confTaller=False)
-    cantidad1=modelTaller.count()
-    return render(request, 'Comercial/serviciobuscar_form.html', {'cantidad':cantidad, 'modelComercial':modelComercial, 'cantidad1':cantidad1, 'modelTaller':modelTaller, 'prefijo':prefijo, 'model': model})"""
 
 
 @login_required
