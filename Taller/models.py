@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 
 
-
 # Create your models here.
 class Division_Territorial(models.Model):
     division = models.CharField(max_length=60)
@@ -129,7 +128,9 @@ class OrdenPrimaria(models.Model):
     fecha_creacion = models.DateTimeField()
     fecha_entrada_taller = models.DateTimeField(blank=True, null=True)
     centro = models.ForeignKey(Centro, on_delete=models.CASCADE)
-    ordena = models.CharField(max_length=60, blank=True, null=True)
+    ordena = models.ForeignKey(
+        Trabajador, on_delete=models.CASCADE, related_name="ordena"
+    )
     """ Estos son campos nuevos"""
     folio_venta = models.CharField(max_length=80, blank=True, null=True)
     fecha_venta = models.DateTimeField(blank=True, null=True)
@@ -152,11 +153,23 @@ class OrdenPrimaria(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE)
     confComercial = models.BooleanField(default=False)
     confTaller = models.BooleanField(default=False)
-    entrega = models.CharField(max_length=60, blank=True, null=True)
+    entrega = models.ForeignKey(
+        Trabajador,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="entrega",
+    )
 
     """ Datos a llenar al reparar"""
     fecha_defectacion = models.DateTimeField(blank=True, null=True)
-    repara = models.CharField(max_length=60, blank=True, null=True)
+    repara = models.ForeignKey(
+        Trabajador,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="repara",
+    )
     accion_reparacion = models.TextField(null=True, blank=True)
     mano_obra = models.ForeignKey(
         ManoObra, on_delete=models.CASCADE, blank=True, null=True
@@ -166,14 +179,24 @@ class OrdenPrimaria(models.Model):
     """ Datos antes de cerrada la orden para la gestion de las salidas"""
     fecha_gestion = models.DateTimeField(blank=True, null=True)
     llama = models.ForeignKey(
-        Trabajador, on_delete=models.CASCADE, blank=True, null=True
+        Trabajador,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="llama",
     )
     nombre_cliente = models.CharField(max_length=160, blank=True, null=True)
     impresion = models.BooleanField(default=False)
 
     """ Datos a llenar para cerrar la orden"""
     fecha_cierre = models.DateTimeField(null=True, blank=True)
-    cierra = models.CharField(max_length=60, blank=True, null=True)
+    cierra = models.ForeignKey(
+        Trabajador,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="cierra",
+    )
     nombre_cliente_recibe = models.CharField(max_length=120, blank=True, null=True)
     direccion_cliente_recibe = models.CharField(max_length=120, blank=True, null=True)
     ci_cliente_recibe = models.CharField(max_length=20, blank=True, null=True)

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="{% static 'css/stylesnew.css' %}" />
 {%endblock%}
 {% block content %}
-<form class="form-horizontal form-label-left" action="" name="informacion" method="post">
+<form class="form-horizontal form-label-left" action="." name="informacion" method="post">
     {%csrf_token%}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -48,7 +48,7 @@
                             <label class="control-label col-md-1 col-sm-3 col-xs-12">Prefijo <span class="required"></span>
                             </label>
                             <select class="select2_single form-control forms-input" name="prefijo" id="id_prefijo" required="required">
-                                <option value="" selected> </option>
+                                <option value="" selected>-----------</option>
                                 {%for prefijo in prefijo %}
                                 {%if prefijo.nombre == object.prefijo.nombre%}
                                 <option value="{{prefijo.pk}}" selected>{{prefijo.nombre}}</option>

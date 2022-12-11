@@ -140,9 +140,7 @@ class Index(BaseDatosMixin, TemplateView):
 class PdfView(BaseDatosMixin, TemplateView):
     def get(self, request, plantilla, *args, **kwargs):
         # pdf=render_to_pdf("orden/orden_trabajo.html")
-        modelo = OrdenPrimaria.objects.filter(
-            ordena=request.user.trabajador.codigo_siprec
-        )
+        modelo = OrdenPrimaria.objects.filter(ordena=request.user.trabajador)
         for modelo in modelo:
             orden_id = modelo.id
         model = get_object_or_404(OrdenPrimaria, id=orden_id)
@@ -160,7 +158,7 @@ def pdf_view(request, plantilla):
     cantidad = modelComercial.count()
     modelTaller = Orden.filter(confComercial=True).filter(confTaller=False)
     cantidad1 = modelTaller.count()
-    modelo = OrdenPrimaria.objects.filter(ordena=request.user.trabajador.codigo_siprec)
+    modelo = OrdenPrimaria.objects.filter(ordena=request.user.trabajador)
     for model in modelo:
         orden_id = model.id
         model = get_object_or_404(OrdenPrimaria, id=orden_id)
@@ -184,9 +182,7 @@ class PDFOrden(View):
 
     def get(self, request, plantilla, *args, **kwargs):
         # pdf=render_to_pdf("orden/orden_trabajo.html")
-        modelo = OrdenPrimaria.objects.filter(
-            ordena=request.user.trabajador.codigo_siprec
-        )
+        modelo = OrdenPrimaria.objects.filter(ordena=request.user.trabajador)
         for model in modelo:
             orden_id = model.id
         model = get_object_or_404(OrdenPrimaria, id=orden_id)
@@ -424,12 +420,12 @@ class CrearOrden(BaseDatosMixin, PermissionRequiredMixin, CreateView):
         context["prefijo"] = Prefijo.objects.all()
         return context
 
-    def dispatch(self, request, *args, **kwargs):
+    """def dispatch(self, request, *args, **kwargs):
         if request.method == "POST":
             messages.add_message(
                 request, messages.INFO, "La orden fue creada con éxito"
             )
-        return super(CrearOrden, self).dispatch(request, *args, **kwargs)
+        return super(CrearOrden, self).dispatch(request, *args, **kwargs)"""
 
     def form_valid(self, form):
         d = datetime.datetime.now()
@@ -451,7 +447,7 @@ class CrearOrden(BaseDatosMixin, PermissionRequiredMixin, CreateView):
 
         self.object.No_orden = "%s%s%s" % (str(last_d), str(last_m), str(temp))
         self.object.centro = centro
-        self.object.ordena = user.trabajador.codigo_siprec
+        self.object.ordena = user.trabajador
         self.object.fecha_creacion = datetime.datetime.now()
         self.object.estado = estado
         self.object.tecnologia = self.object.modelo.tecnologia
@@ -496,7 +492,7 @@ class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         centro = user.trabajador.centro
         self.object = form.save(commit=False)
         self.object.fecha_defectacion = datetime.datetime.now()
-        self.object.repara = user.trabajador.codigo_siprec
+        self.object.repara = user.trabajador
         modelo = Consumo_Recursos.objects.filter(centro=user.trabajador.centro).filter(
             asociado_orden=False
         )
@@ -599,7 +595,7 @@ class CerrarOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
                 days=45
             )
 
-        self.object.cierra = user.trabajador.codigo_siprec
+        self.object.cierra = user.trabajador
         self.object.fecha_cierre = datetime.datetime.now()
         self.object = form.save()
         return super(CerrarOrden, self).form_valid(form)

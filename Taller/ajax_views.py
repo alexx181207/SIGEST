@@ -92,7 +92,7 @@ def entregar_taller(request):
     datos = json.loads(request.POST.get("data"))
     modelprim = get_object_or_404(OrdenPrimaria, pk=datos["id"])
     modelprim.confComercial = True
-    modelprim.entrega = request.user.trabajador.codigo_siprec
+    modelprim.entrega = request.user.trabajador
     modelprim.save()
     return JsonResponse({"saved": "OK"})
 
