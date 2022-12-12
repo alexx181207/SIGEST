@@ -47,40 +47,22 @@
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <label class="control-label col-md-1 col-sm-3 col-xs-12">Prefijo <span class="required"></span>
                             </label>
-                            <select class="select2_single form-control forms-input" name="prefijo" id="id_prefijo" required="required">
-                                <option value="" selected>-----------</option>
-                                {%for prefijo in prefijo %}
-                                {%if prefijo.nombre == object.prefijo.nombre%}
-                                <option value="{{prefijo.pk}}" selected>{{prefijo.nombre}}</option>
-                                {%else%}
-                                <option value="{{prefijo.pk}}">{{prefijo.nombre}}</option>
-                                {%endif%}
-                                {%endfor%}
-                            </select>
+                            {{form.prefijo}}
                         </div>
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <label class="control-label col-md-2 col-sm-3 col-xs-12">Servicio <span class="required"></span>
                             </label>
-                            <input type="text" id="id_servicio" name="servicio" required="required" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.servicio}}">
+                            {{form.servicio}}
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Modelo <span class="required"></span>
                             </label>
-                            <select class="select2_single form-control forms-input" required="required" name="modelo" id="id_modelo">
-                                <option value="" selected> </option>
-                                {%for modelo in mod %}
-                                {%if modelo.tecnologia.nombre == object.tecnologia.nombre%}
-                                <option value="{{modelo.pk}}" selected>{{modelo.nombre}}</option>
-                                {%else%}
-                                <option value="{{modelo.pk}}">{{modelo.nombre}}</option>
-                                {%endif%}
-                                {%endfor%}
-                            </select>
+                            {{form.modelo}}
                         </div>
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Serie <span class="required"></span>
                             </label>
-                            <input type="text" id="id_serie" name="serie" required="required" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.serie}}">
+                            {{form.serie}}
                         </div>
                         <div class="col-md-2 col-sm-6 col-xs-12">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Garantía
@@ -97,7 +79,7 @@
                             <label>Venc. Garantía <span class="required"></span>
                             </label>
                             <div class='input-group date' id='myDatepicker'>
-                                <input type="text" class="form-control forms-input" name="fecha_vencimiento_garantia" id="id_fecha_vencimiento_garantia" value="{{object.fecha_vencimiento_garantia}}" />
+                                {{form.fecha_vencimiento_garantia}}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -108,7 +90,7 @@
                         <div class="form-group">
                             <label>Folio <span class="required"></span>
                             </label>
-                            <input type="text" id="id_folio_venta" name="folio_venta" class="form-control col-md-7 col-xs-12 forms-input" value="{{object.folio_venta}}">
+                            {{form.folio_venta}}
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -116,7 +98,7 @@
                             <label>Fecha Venta <span class="required"></span>
                             </label>
                             <div class='input-group date' id='myDatepicker2'>
-                                <input type="text" class="form-control forms-input" name="fecha_venta" id="id_fecha_venta" value="{{object.fecha_venta}}" />
+                                {{form.fecha_venta}}
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -127,52 +109,48 @@
                         <div class="form-group">
                             <label>Defectos<span class="required"></span>
                             </label>
-                            <select class="select2_multiple form-control forms-input" multiple="multiple" name="defecto" id="id_defecto" required="required">
-                                {%for defecto in defec %}
-                                <option value="{{defecto.pk}}">{{defecto.nombre}}</option>
-                                {%endfor%}
-                            </select>
+                            {{form.defecto}}
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Observaciones</label>
-                            <textarea class="resizable_textarea form-control forms-input" name="observaciones" id="id_observaciones" value="{{object.observaciones}}"></textarea>
+                            {{form.observaciones}}
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nombre del cliente <span class="required"></span>
                             </label>
-                            <input type="text" class="form-control forms-input" id="id_nombre_cliente_entrega" name="nombre_cliente_entrega" required="required" value="{{object.nombre_cliente_entrega}}">
+                            {{form.nombre_cliente_entrega}}
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Dirección Particular <span class="required"></span>
                             </label>
-                            <input type="text" class="form-control forms-input" name="direccion_cliente_entrega" id="id_direccion_cliente_entrega" required="required" value="{{object.direccion_cliente_entrega}}">
+                            {{form.direccion_cliente_entrega}}
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>CI del cliente<span class="required"></span>
                             </label>
-                            <input type="text" class="form-control forms-input" name="ci_cliente_entrega" id="id_ci_cliente_entrega" required="required" value="{{object.ci_cliente_entrega}}">
+                            {{form.ci_cliente_entrega}}
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Contacto Telefónico<span class="required"></span>
                             </label>
-                            <input type="text" class="form-control forms-input" name="contacto_telefono" id="id_contacto_telefono" required="required" value="{{object.contacto_telefono}}">
+                            {{form.contacto_telefono}}
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" class="flat form-control" name="propietario" id="id_propietario" {%if object.propietario%} checked="checked" {%endif%}>
+                                    {{form.propietario}}
                                     <strong>Propietario</strong>
                                 </label>
                             </div>

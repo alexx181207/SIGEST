@@ -40,31 +40,21 @@
                         <div class="form-group">
                             <label>Acción de Reparación<span class="required"></span>
                             </label>
-                            <input type="text" name="accion_reparacion" id="id_accion_reparacion" required="required" class="form-control col-md-7 col-xs-12 forms-input">
+                            {{form.accion_reparacion}}
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nuevo Estado<span class="required"></span>
                             </label>
-                            <select class="select2_single form-control forms-input" required="required" name="estado" required id="id_estado">
-                                <option value="" selected> </option>
-                                {%for estado in estado %}
-                                <option value="{{estado.pk}}">{{estado.nombre}}</option>
-                                {%endfor%}
-                            </select>
+                            {{form.estado}}
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Tipo Mano de Obra<span class="required"></span>
                             </label>
-                            <select class="select2_single form-control forms-input" required="required" name="mano_obra" id="id_mano_obra">
-                                <option value="" selected> </option>
-                                {%for mano_obra in mano_obra %}
-                                <option value="{{mano_obra.pk}}">{{mano_obra.tipo}}</option>
-                                {%endfor%}
-                            </select>
+                            {{form.mano_obra}}
                         </div>
                     </div>
                     <div class="col-sm-2">

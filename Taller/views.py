@@ -1,5 +1,11 @@
 # import os
-from .forms import LoginForm  # , DefectarModel, BuscarOrdenForm, BuscarServicioForm
+from .forms import (
+    LoginForm,
+    PrimaryOrderForm,
+    RepairForm,
+    TalkForm,
+    CloseOrderForm,
+)
 from .models import (
     OrdenPrimaria,
     Modelo,
@@ -199,13 +205,11 @@ class PDFGestion(LoginRequiredMixin, View):
         # pdf=render_to_pdf("orden/orden_trabajo.html")
         user = request.user
         model = (
-            OrdenPrimaria.objects.filter(centro=request.user.trabajador.centro)
+            OrdenPrimaria.objects.filter(centro=user.trabajador.centro)
             .exclude(cerrada=True)
-            .exclude(estado=get_object_or_404(Estado, pk=1))
-            .exclude(estado=get_object_or_404(Estado, pk=2))
             .exclude(nombre_cliente=None)
             .filter(impresion=False)
-            .filter(llama=request.user.trabajador)
+            .filter(llama=user.trabajador)
         )
         reporte_gestion = ReporteGestionImpreso.objects.create(reporta=user.trabajador)
         for modelo in model:
@@ -390,28 +394,10 @@ def reimprimir_orden(request, plantilla, ordenprimaria_id):
 
 class CrearOrden(BaseDatosMixin, PermissionRequiredMixin, CreateView):
     model = OrdenPrimaria
-    modelact = None
+    form_class = PrimaryOrderForm
     template_name = "Comercial/ordenprimaria_form.html"
-    # success_url = render_to_pdf(request, 'orden/orden_trabajo.html',{'modelact': modelact})
     success_url = reverse_lazy("pdf_orden")
     permission_required = "Taller.add_ordenprimaria"
-    fields = [
-        "prefijo",
-        "servicio",
-        "modelo",
-        "defecto",
-        "serie",
-        "nombre_cliente_entrega",
-        "direccion_cliente_entrega",
-        "ci_cliente_entrega",
-        "contacto_telefono",
-        "propietario",
-        "folio_venta",
-        "fecha_venta",
-        "garantia",
-        "fecha_vencimiento_garantia",
-        "observaciones",
-    ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -460,12 +446,12 @@ class CrearOrden(BaseDatosMixin, PermissionRequiredMixin, CreateView):
 
 
 class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    modelprim = None
+    # modelprim = None
     model = OrdenPrimaria
+    form_class = RepairForm
     success_url = reverse_lazy("ordenes_pendientes")
     permission_required = "Taller.add_ordenhistorico"
     template_name = "Taller/ordenreparada_form.html"
-    fields = ["accion_reparacion", "estado", "mano_obra"]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -478,7 +464,7 @@ class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         return context
 
     def dispatch(self, request, pk, *args, **kwargs):
-        self.modelprim = get_object_or_404(OrdenPrimaria, id=pk)
+        # self.modelprim = get_object_or_404(OrdenPrimaria, id=pk)
         if request.method == "POST":
             messages.add_message(
                 request,
@@ -520,8 +506,9 @@ class UpdateOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
     template_name = "Comercial/ordenprimaria_form.html"
     success_url = reverse_lazy("list_updates")
     permission_required = "Taller.add_ordenprimaria"
+    form_class = PrimaryOrderForm
 
-    fields = [
+    """fields = [
         "prefijo",
         "servicio",
         "modelo",
@@ -537,7 +524,7 @@ class UpdateOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         "garantia",
         "fecha_vencimiento_garantia",
         "observaciones",
-    ]
+    ]"""
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -566,7 +553,7 @@ class CerrarOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy("ordenes_reparadas")
     template_name = "Comercial/ordencerrada_form.html"
     permission_required = "Taller.add_ordenprimaria"
-    fields = ["nombre_cliente_recibe", "direccion_cliente_recibe", "ci_cliente_recibe"]
+    form_class = CloseOrderForm
 
     @method_decorator(login_required)
     def dispatch(self, request, pk, *args, **kwargs):
@@ -602,12 +589,11 @@ class CerrarOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
 
 
 class OrdenLlamada(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    modelreparada = None
     model = OrdenPrimaria
     success_url = reverse_lazy("gestion_telefono")
     template_name = "Comercial/ordenllamada_form.html"
     permission_required = "Taller.add_ordenprimaria"
-    fields = ["nombre_cliente"]
+    form_class = TalkForm
 
     @method_decorator(login_required)
     def dispatch(self, request, pk, *args, **kwargs):
