@@ -39,7 +39,7 @@ class PrimaryOrderForm(ModelForm):
                     "class": "select2_single form-control forms-input",
                 }
             ),
-            "servicio": forms.NumberInput(
+            "servicio": forms.TextInput(
                 attrs={"class": "form-control col-md-7 col-xs-12 forms-input"}
             ),
             "ci_cliente_entrega": forms.NumberInput(
@@ -95,13 +95,11 @@ class PrimaryOrderForm(ModelForm):
             ),
         }
 
-        """def validate_servicio(self, value):
-        	if value.is_digit()==False:
-        		raise forms.ValueError("El servicio debe ser un valor numérico")
-        	return value
-
-        def validate(self, data):
-        	return data"""
+    """def clean_servicio(self):
+        servicio = self.cleaned_data.get("servicio")
+        if isinstance(servicio, int) == False:
+            raise forms.ValidationError("El servicio debe ser un valor numérico")
+        return servicio"""
 
 
 class RepairForm(ModelForm):

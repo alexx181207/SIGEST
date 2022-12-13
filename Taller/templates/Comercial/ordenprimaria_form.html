@@ -41,31 +41,65 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
+
                 <div class="x_content">
+                    
                     <!-- Smart Wizard -->
-                    <div class="form-group">
-                        <div class="col-md-2 col-sm-6 col-xs-12">
-                            <label class="control-label col-md-1 col-sm-3 col-xs-12">Prefijo <span class="required"></span>
+                    <div class="form-group" style="margin:0px">
+                        <div class="col-md-2">
+                            {%if form.prefijo.errors%}
+                            {%for error in form.prefijo.errors%}
+                             <p style="color:red">{{error}}</p>
+                             {%endfor%}
+                             {%endif%}
+                        </div>
+                        <div class="col-md-4">
+                            {%if form.servicio.errors%}
+                            {%for error in form.servicio.errors%}
+                             <p style="color:red"><strong>{{error}}</strong></p>
+                             {%endfor%}
+                             {%endif%}
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin:0px">
+                        <div class="col-sm-2">
+                            <div class="form-group" style="text-align:center">
+                            <label>Prefijo <span class="required"></span>
                             </label>
                             {{form.prefijo}}
                         </div>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
-                            <label class="control-label col-md-2 col-sm-3 col-xs-12">Servicio <span class="required"></span>
-                            </label>
-                            {{form.servicio}}
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Modelo <span class="required"></span>
+                        <div class="col-sm-2">
+                            <div class="form-group" style="text-align:center">
+                            <label>Servicio <span class="required"></span>
+                            </label>
+                            
+                             {{form.servicio}}
+                          </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group" style="text-align:center">
+                            <label>Modelo <span class="required"></span>
                             </label>
                             {{form.modelo}}
                         </div>
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Serie <span class="required"></span>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group" style="text-align:center">
+                            <label>Serie <span class="required"></span>
                             </label>
                             {{form.serie}}
                         </div>
-                        <div class="col-md-2 col-sm-6 col-xs-12">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Garantía
+                        </div>
+                        <div class="col-sm-2" >
+                            <div class="form-group" style="text-align:center">
+                            <label>Garantía
                             </label>
                             <select class="select2_single form-control forms-input" name="garantia" id="id_garantia" required="required" value="{{object.garantia}}">
                                 <option value="{{object.pk}}" selected>{{object.garantia}}</option>
@@ -73,9 +107,12 @@
                                 <option>NO</option>
                             </select>
                         </div>
+                        </div>
                     </div>
+
+                    <div class="form-group" style="margin:0px">
                     <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group" style="text-align:center">
                             <label>Venc. Garantía <span class="required"></span>
                             </label>
                             <div class='input-group date' id='myDatepicker'>
@@ -87,14 +124,14 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group" style="text-align:center">
                             <label>Folio <span class="required"></span>
                             </label>
                             {{form.folio_venta}}
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="form-group">
+                        <div class="form-group" style="text-align:center">
                             <label>Fecha Venta <span class="required"></span>
                             </label>
                             <div class='input-group date' id='myDatepicker2'>
@@ -106,18 +143,22 @@
                         </div>
                     </div>
                     <div class="col-sm-3">
-                        <div class="form-group">
-                            <label>Defectos<span class="required"></span>
+                        <div class="form-group" style="text-align:center">
+                            <label >Defectos<span class="required"></span>
                             </label>
                             {{form.defecto}}
                         </div>
                     </div>
+                </div>
+                <div class="form-group" style="margin:0px">
                     <div class="col-sm-12">
                         <div class="form-group">
                             <label>Observaciones</label>
                             {{form.observaciones}}
                         </div>
                     </div>
+                </div>
+                <div class="form-group" style="margin:0px">
                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Nombre del cliente <span class="required"></span>
@@ -146,6 +187,7 @@
                             {{form.contacto_telefono}}
                         </div>
                     </div>
+                </div>
                     <div class="col-sm-2">
                         <div class="form-group">
                             <div class="checkbox">
