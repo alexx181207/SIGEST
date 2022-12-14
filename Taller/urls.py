@@ -35,12 +35,12 @@ urlpatterns = [
     ),
     path(
         "index/list/defectar/fuera/termino",
-        list_views.sDefectarfTiempo.as_view(),
+        list_views.ListSinDefectar.as_view(),
         name="defectar_fuera_termino",
     ),
     path(
         "index/list/reparar/fuera/termino",
-        list_views.sRepararfTiempo.as_view(),
+        list_views.ListSinReparar.as_view(),
         name="reparar_fuera_termino",
     ),
     path(
@@ -59,7 +59,7 @@ urlpatterns = [
         name="ordenes_pendientes",
     ),
     path(
-        "index/list/warranty/", list_views.EquipmentWarr.as_view(), name="warranty_list"
+        "index/list/warranty/", list_views.WarrantyList.as_view(), name="warranty_list"
     ),
     path(
         "index/list/pendientes/edades",
