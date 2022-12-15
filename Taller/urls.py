@@ -6,7 +6,6 @@ from . import (
     ajax_views,
 )
 
-
 urlpatterns = [
     # post views
     path("", views.loggin, name="loggin"),
@@ -81,7 +80,6 @@ urlpatterns = [
         {"plantilla": "Comercial/pdf_garantia.html"},
         name="pdf_garantia",
     ),
-    # path('create/imp_orden/', views.PDFOrden.as_view(), name='imp_orden'),
     path(
         "create/imp_orden/",
         views.PDFOrden.as_view(),
@@ -97,7 +95,6 @@ urlpatterns = [
     path("create/gestion_orden/", views.PDFGestion.as_view(), name="gestion_orden"),
     path("pentregar/", ajax_views.entregar_taller, name="orden_entregar_taller"),
     path("pconfirmar/", ajax_views.confirmar_taller, name="orden_confirmar_taller"),
-    # path('pentregar_act/', ajax_views.entregar_taller_act, name='orden_entregar_taller_act'),
     path(
         "buscar/servicio/", ajax_views.BuscarServicios.as_view(), name="servicio_form"
     ),
@@ -112,10 +109,14 @@ urlpatterns = [
         name="recursos_consumidos",
     ),
     re_path(
-        r"^ordenprimaria/(?P<pk>[0-9]+)/$", views.UpdateOrder.as_view(), name="update_order"
+        r"^ordenprimaria/(?P<pk>[0-9]+)/$",
+        views.UpdateOrder.as_view(),
+        name="update_order",
     ),
     re_path(
-        r"^ordenprimaria/(?P<pk>[0-9]+)/delete/$", views.DeleteOrder.as_view(), name="delete_order"
+        r"^ordenprimaria/(?P<pk>[0-9]+)/delete/$",
+        views.DeleteOrder.as_view(),
+        name="delete_order",
     ),
     re_path(
         r"^buscar/servicio/ajax/$", ajax_views.list_json, name="servicio_encontrar"

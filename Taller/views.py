@@ -324,7 +324,7 @@ def loggedout(request):
     return HttpResponseRedirect("/./")
 
 
-@login_required
+"""@login_required
 def buscarservicio(request):
     error = False
     Orden = OrdenPrimaria.objects.filter(centro=request.user.trabajador.centro)
@@ -368,7 +368,7 @@ def buscarservicio(request):
             "modelTaller": modelTaller,
             "error": error,
         },
-    )
+    )"""
 
 
 def reimprimir_orden(request, plantilla, ordenprimaria_id):
