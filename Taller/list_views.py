@@ -3,24 +3,12 @@ from .views import BaseDatosMixin, CalcularTiempo
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+from base.views import ListMixin
 import datetime
 
 
-class ListadoOrdenesMixin(BaseDatosMixin, ListView):
-    model = OrdenPrimaria
+class ListadoOrdenesMixin(ListMixin):
     module = "Information"
-
-    def __init__(self):
-        self.template_name = self.get_template()
-
-    def get_template(self):
-        self.template_name = (
-            self.module + "/" + self.__class__.__name__.lower() + ".html"
-        )
-        return self.template_name
-
-    def get_list(self):
-        return OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
 
     def get_queryset(self):
         self.queryset = self.get_list()
