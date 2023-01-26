@@ -1,101 +1,89 @@
-from .models import OrdenPrimaria, Estado, Tecnologia
-from .views import BaseDatosMixin, CalcularTiempo
+from Comercial.models import OrdenPrimaria
+from base.models import Estado, Tecnologia
+from base.views import BaseDatosMixin, CalcularTiempo, ListMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 import datetime
 
 
-class ListadoOrdenesMixin(BaseDatosMixin, ListView):
-    model = OrdenPrimaria
-    template_name = "Information/list.html"
-    tecnologia = None
-    orden = None
-    model1 = None
-    model2 = None
+class ListadoOrdenesMixin(ListMixin):
+    module = "Information"
 
     def get_queryset(self):
-        self.orden = OrdenPrimaria.objects.filter(
-            centro=self.request.user.trabajador.centro
-        )
-        return self.orden
+        self.queryset = self.get_list()
+        return self.queryset
 
 
 class ListUpdates(ListadoOrdenesMixin):
-    template_name = "Comercial/listUpdate.html"
+    module = "Comercial"
 
     def get_queryset(self):
-        self.object_list = OrdenPrimaria.objects.filter(
-            centro=self.request.user.trabajador.centro
-        ).exclude(confComercial=True)
-        return self.object_list
+        self.queryset = self.get_list().exclude(confComercial=True)
+        return self.queryset
 
 
 class RegistroTFA(ListadoOrdenesMixin):
-    template_name = "Taller/list_reg_tfa.html"
+    module = "Taller"
 
     def get_queryset(self):
-        self.tecnologia = get_object_or_404(Tecnologia, pk=1)
-        self.orden = (
-            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
-            .filter(tecnologia=self.tecnologia)
+        self.queryset = (
+            self.get_list()
+            .filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
             .exclude(fecha_entrada_taller=None)
         )
-        return self.orden
+        return self.queryset
 
 
-class RegistroTB(RegistroTFA):
-    template_name = "Taller/list_reg_tb.html"
+class RegistroTB(ListadoOrdenesMixin):
+    module = "Taller"
 
     def get_queryset(self):
-        self.tecnologia = get_object_or_404(Tecnologia, pk=2)
-        self.orden = (
-            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
-            .filter(tecnologia=self.tecnologia)
+        self.queryset = (
+            self.get_list()
+            .filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
             .exclude(fecha_entrada_taller=None)
         )
-        return self.orden
+        return self.queryset
 
 
 class ListadoPendientes(ListadoOrdenesMixin):
-    template_name = "Taller/list_pendientes.html"
+    module = "Taller"
 
     def get_queryset(self):
-        self.orden = (
-            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
+        self.queryset = (
+            self.get_list()
+            .exclude(fecha_entrada_taller=None)
             .exclude(estado=get_object_or_404(Estado, pk=3))
             .exclude(estado=get_object_or_404(Estado, pk=4))
-            .exclude(fecha_entrada_taller=None)
         )
-        return self.orden
+        return self.queryset
 
 
-class ListadoReparadas(ListadoOrdenesMixin):
-    template_name = "Taller/list_reparadas.html"
-
+class ListadoReparadas(ListadoPendientes):
     def get_queryset(self):
-        self.orden = (
-            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
+        self.queryset = (
+            self.get_list()
             .exclude(cerrada=True)
             .exclude(estado=get_object_or_404(Estado, pk=1))
             .exclude(estado=get_object_or_404(Estado, pk=2))
         )
-        return self.orden
+        return self.queryset
 
 
 class GestionTelefono(ListadoOrdenesMixin):
-    template_name = "Comercial/list_gest_tel.html"
+    module = "Comercial"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.model1 = (
+        model1 = (
             OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
             .exclude(cerrada=True)
             .exclude(estado=get_object_or_404(Estado, pk=1))
             .exclude(estado=get_object_or_404(Estado, pk=2))
             .filter(nombre_cliente=None)
         )
-        self.model2 = (
+        model2 = (
             OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
             .exclude(cerrada=True)
             .exclude(estado=get_object_or_404(Estado, pk=1))
@@ -104,31 +92,39 @@ class GestionTelefono(ListadoOrdenesMixin):
             .filter(impresion=False)
             .filter(llama=self.request.user.trabajador)
         )
-        context["model1"] = self.model1
-        context["model2"] = self.model2
+        context["model1"] = model1
+        context["model2"] = model2
         return context
 
 
 class EntregarOrdenesTaller(ListadoOrdenesMixin):
-    template_name = "Miscelaneos/list_sin_entregar.html"
+    module = "Miscelaneos"
 
     def get_queryset(self):
-        self.orden = OrdenPrimaria.objects.filter(
-            centro=self.request.user.trabajador.centro
-        ).filter(confComercial=False)
-        return self.orden
+        self.queryset = self.get_list().filter(confComercial=False)
+        return self.queryset
 
 
-class ConfirmarOrdenesTaller(ListadoOrdenesMixin):
-    template_name = "Miscelaneos/list_sin_confirmar.html"
-
+class ConfirmarOrdenesTaller(EntregarOrdenesTaller):
     def get_queryset(self):
-        self.orden = (
-            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
-            .filter(confComercial=True)
-            .filter(confTaller=False)
+        self.queryset = (
+            self.get_list().filter(confComercial=True).filter(confTaller=False)
         )
-        return self.orden
+        return self.queryset
+
+
+"""class EntregaOrdenTaller(ListadoOrdenesMixin):
+    module="Miscelaneos"
+
+    def get_queryset(self, ordenprimaria_id):
+        self.queryset = self.get_list().filter(confComercial=False)
+        self.queryset=get_object_or_404(self.queryset, id=ordenprimaria_id)
+        return self.queryset
+
+    def get(self, request, ordenprimaria_id):
+        modelo=self.get_list().filter(confComercial=False)
+        modelo=get_object_or_404(modelo, id=ordenprimaria_id)
+        return modelo"""
 
 
 @login_required
@@ -142,7 +138,7 @@ def EntregaOrdenTaller(request, ordenprimaria_id):
     model = get_object_or_404(OrdenPrimaria, id=ordenprimaria_id)
     return render(
         request,
-        "Miscelaneos/orden_sin_entregar.html",
+        "Miscelaneos/entregaordentaller.html",
         {
             "cantidad": cantidad,
             "modelComercial": modelComercial,
@@ -164,7 +160,7 @@ def ConfirmaOrdenTaller(request, ordenprimaria_id):
     model = get_object_or_404(OrdenPrimaria, id=ordenprimaria_id)
     return render(
         request,
-        "Miscelaneos/orden_sin_confirmar.html",
+        "Miscelaneos/confirmaordentaller.html",
         {
             "cantidad": cantidad,
             "modelComercial": modelComercial,
@@ -176,8 +172,6 @@ def ConfirmaOrdenTaller(request, ordenprimaria_id):
 
 
 class TrabajosDiarios(ListadoOrdenesMixin):
-    template_name = "Information/trabajos_diarios.html"
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         dt = datetime.datetime.now()
@@ -203,12 +197,6 @@ class TrabajosDiarios(ListadoOrdenesMixin):
         context["model_reparadas"] = model_reparadas
         context["model_cerradas"] = model_cerradas
         return context
-
-    def get_queryset(self):
-        self.orden = OrdenPrimaria.objects.filter(
-            centro=self.request.user.trabajador.centro
-        )
-        return self.orden
 
 
 @login_required
@@ -263,9 +251,7 @@ def ordenesEdades(request):
     )
 
 
-class sDefectarfTiempo(ListadoOrdenesMixin):
-    template_name = "Information/list_sin_defectar.html"
-
+class ListSinDefectar(ListadoOrdenesMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         listado = []
@@ -280,17 +266,15 @@ class sDefectarfTiempo(ListadoOrdenesMixin):
         return context
 
     def get_queryset(self):
-        self.orden = (
-            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
+        self.queryset = (
+            self.get_list()
             .filter(fecha_defectacion=None)
             .exclude(fecha_entrada_taller=None)
         )
-        return self.orden
+        return self.queryset
 
 
-class sRepararfTiempo(ListadoOrdenesMixin):
-    template_name = "Information/list_sin_reparar.html"
-
+class ListSinReparar(ListadoOrdenesMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         listado = []
@@ -305,19 +289,17 @@ class sRepararfTiempo(ListadoOrdenesMixin):
         return context
 
     def get_queryset(self):
-        self.orden = (
-            OrdenPrimaria.objects.filter(centro=self.request.user.trabajador.centro)
+        self.queryset = (
+            self.get_list()
             .exclude(cerrada=True)
             .exclude(estado=get_object_or_404(Estado, pk=3))
             .exclude(estado=get_object_or_404(Estado, pk=4))
             .exclude(fecha_entrada_taller=None)
         )
-        return self.orden
+        return self.queryset
 
 
-class EquipmentWarr(ListadoOrdenesMixin):
-    template_name = "Information/warranty_list.html"
-
+class WarrantyList(ListadoOrdenesMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         listado = []
@@ -332,7 +314,5 @@ class EquipmentWarr(ListadoOrdenesMixin):
         return context
 
     def get_queryset(self):
-        self.orden = OrdenPrimaria.objects.filter(
-            centro=self.request.user.trabajador.centro
-        ).exclude(garantia_reparacion=None)
-        return self.orden
+        self.queryset = self.get_list().exclude(garantia_reparacion=None)
+        return self.queryset
