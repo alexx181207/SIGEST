@@ -1,5 +1,7 @@
-from .models import OrdenPrimaria, OrdenHistorico, Prefijo, Consumo_Recursos, Recursos
-from .views import BaseDatosMixin
+from Comercial.models import OrdenPrimaria
+from .models import OrdenHistorico 
+from base.models import Prefijo, Consumo_Recursos, Recursos
+from base.views import BaseDatosMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required
@@ -92,7 +94,7 @@ def entregar_taller(request):
     datos = json.loads(request.POST.get("data"))
     modelprim = get_object_or_404(OrdenPrimaria, pk=datos["id"])
     modelprim.confComercial = True
-    modelprim.entrega = request.user.trabajador.codigo_siprec
+    modelprim.entrega = request.user.trabajador
     modelprim.save()
     return JsonResponse({"saved": "OK"})
 
