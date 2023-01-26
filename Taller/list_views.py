@@ -1,9 +1,9 @@
-from .models import OrdenPrimaria, Estado, Tecnologia
-from .views import BaseDatosMixin, CalcularTiempo
+from Comercial.models import OrdenPrimaria
+from base.models import Estado, Tecnologia
+from base.views import BaseDatosMixin, CalcularTiempo, ListMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
-from base.views import ListMixin
 import datetime
 
 
@@ -25,19 +25,26 @@ class ListUpdates(ListadoOrdenesMixin):
 
 class RegistroTFA(ListadoOrdenesMixin):
     module = "Taller"
-    tecnologia = get_object_or_404(Tecnologia, pk=1)
 
     def get_queryset(self):
         self.queryset = (
             self.get_list()
-            .filter(tecnologia=self.tecnologia)
+            .filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
             .exclude(fecha_entrada_taller=None)
         )
         return self.queryset
 
 
-class RegistroTB(RegistroTFA):
-    tecnologia = get_object_or_404(Tecnologia, pk=2)
+class RegistroTB(ListadoOrdenesMixin):
+    module = "Taller"
+
+    def get_queryset(self):
+        self.queryset = (
+            self.get_list()
+            .filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
+            .exclude(fecha_entrada_taller=None)
+        )
+        return self.queryset
 
 
 class ListadoPendientes(ListadoOrdenesMixin):

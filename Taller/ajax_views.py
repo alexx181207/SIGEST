@@ -1,5 +1,7 @@
-from .models import OrdenPrimaria, OrdenHistorico, Prefijo, Consumo_Recursos, Recursos
-from .views import BaseDatosMixin
+from Comercial.models import OrdenPrimaria
+from .models import OrdenHistorico 
+from base.models import Prefijo, Consumo_Recursos, Recursos
+from base.views import BaseDatosMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.base import TemplateView
 from django.contrib.auth.decorators import login_required

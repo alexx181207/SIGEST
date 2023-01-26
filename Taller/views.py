@@ -1,26 +1,24 @@
 # import os
 from .forms import (
-    LoginForm,
-    PrimaryOrderForm,
+    #LoginForm,
+    #PrimaryOrderForm,
     RepairForm,
-    TalkForm,
-    CloseOrderForm,
+    #TalkForm,
+    #CloseOrderForm,
 )
-from .models import (
-    OrdenPrimaria,
+from base.models import (
     Modelo,
     Defecto,
     Estado,
     Recursos,
     Tecnologia,
     Prefijo,
-    OrdenHistorico,
-    ReporteGestionImpreso,
     ManoObra,
     Consumo_Recursos,
 )
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from .models import OrdenHistorico
+from Comercial.models import OrdenPrimaria, ReporteGestionImpreso
+
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -112,187 +110,6 @@ class Index(BaseDatosMixin, TemplateView):
         return context
 
 
-class PdfView(BaseDatosMixin, TemplateView):
-    def get(self, request, plantilla, *args, **kwargs):
-        # pdf=render_to_pdf("orden/orden_trabajo.html")
-        modelo = OrdenPrimaria.objects.filter(ordena=request.user.trabajador)
-        for modelo in modelo:
-            orden_id = modelo.id
-        model = get_object_or_404(OrdenPrimaria, id=orden_id)
-        context = super().get_context_data(**kwargs)
-        context["model"] = model
-        return render(request, plantilla, context)
-
-
-@login_required
-def pdf_view(request, plantilla):
-    Orden = OrdenPrimaria.objects.filter(centro=request.user.trabajador.centro).filter(
-        cerrada=False
-    )
-    modelComercial = Orden.filter(confComercial=False)
-    cantidad = modelComercial.count()
-    modelTaller = Orden.filter(confComercial=True).filter(confTaller=False)
-    cantidad1 = modelTaller.count()
-    modelo = OrdenPrimaria.objects.filter(ordena=request.user.trabajador)
-    for model in modelo:
-        orden_id = model.id
-        model = get_object_or_404(OrdenPrimaria, id=orden_id)
-    return render(
-        request,
-        plantilla,
-        {
-            "cantidad": cantidad,
-            "modelComercial": modelComercial,
-            "cantidad1": cantidad1,
-            "modelTaller": modelTaller,
-            "model": model,
-        },
-    )
-
-
-class PDFOrden(View):
-    """
-    Regresa PDF basando en template Django/HTML
-    """
-
-    def get(self, request, plantilla, *args, **kwargs):
-        # pdf=render_to_pdf("orden/orden_trabajo.html")
-        modelo = OrdenPrimaria.objects.filter(ordena=request.user.trabajador)
-        for model in modelo:
-            orden_id = model.id
-        model = get_object_or_404(OrdenPrimaria, id=orden_id)
-        pdf = render_to_pdf(plantilla, {"model": model})
-        return HttpResponse(pdf, content_type="application/pdf")
-
-
-class PDFGestion(LoginRequiredMixin, View):
-    """
-    Regresa PDF basando en template Django/HTML
-    """
-
-    def get(self, request, *args, **kwargs):
-        # pdf=render_to_pdf("orden/orden_trabajo.html")
-        user = request.user
-        model = (
-            OrdenPrimaria.objects.filter(centro=user.trabajador.centro)
-            .exclude(cerrada=True)
-            .exclude(nombre_cliente=None)
-            .filter(impresion=False)
-            .filter(llama=user.trabajador)
-        )
-        reporte_gestion = ReporteGestionImpreso.objects.create(reporta=user.trabajador)
-        for modelo in model:
-            reporte_gestion.ordenes.add(modelo)
-            modelo.impresion = True
-            modelo.save()
-        reporte_gestion.save()
-        pdf = render_to_pdf("orden/gest_reparada.html", {"model": model, "user": user})
-        return HttpResponse(pdf, content_type="application/pdf")
-
-
-def loggin(request):
-    return HttpResponseRedirect("/accounts/login/")
-
-
-def user_login(request):
-    if request.method == "POST":
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd["username"], password=cd["password"])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    messages.add_message(
-                        request, messages.INFO, "Usuario autenticado satisfactoriamente"
-                    )
-                    Orden = OrdenPrimaria.objects.filter(
-                        centro=request.user.trabajador.centro
-                    ).filter(cerrada=False)
-                    modelComercial = Orden.filter(confComercial=False)
-                    cantidad = modelComercial.count()
-                    modelTaller = Orden.filter(confComercial=True).filter(
-                        confTaller=False
-                    )
-                    cantidad1 = modelTaller.count()
-                    cant_defec_tfa = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
-                        .filter(estado=get_object_or_404(Estado, pk=1))
-                        .count()
-                    )
-                    cant_pend_tfa = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
-                        .filter(estado=get_object_or_404(Estado, pk=2))
-                        .count()
-                    )
-                    cant_rep_tfa = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
-                        .filter(estado=get_object_or_404(Estado, pk=3))
-                        .count()
-                    )
-                    cant_irrep_tfa = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=1))
-                        .filter(estado=get_object_or_404(Estado, pk=4))
-                        .count()
-                    )
-                    cant_defec_tb = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
-                        .filter(estado=get_object_or_404(Estado, pk=1))
-                        .count()
-                    )
-                    cant_pend_tb = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
-                        .filter(estado=get_object_or_404(Estado, pk=2))
-                        .count()
-                    )
-                    cant_rep_tb = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
-                        .filter(estado=get_object_or_404(Estado, pk=3))
-                        .count()
-                    )
-                    cant_irrep_tb = (
-                        Orden.filter(tecnologia=get_object_or_404(Tecnologia, pk=2))
-                        .filter(estado=get_object_or_404(Estado, pk=4))
-                        .count()
-                    )
-                    totalDefec = cant_defec_tfa + cant_defec_tb
-                    totalPend = cant_pend_tfa + cant_pend_tb
-                    totalReparado = cant_rep_tfa + cant_rep_tb
-                    totalIrrep = cant_irrep_tb + cant_irrep_tfa
-                    return render(
-                        request,
-                        "Miscelaneos/index.html",
-                        {
-                            "cantidad": cantidad,
-                            "modelComercial": modelComercial,
-                            "cantidad1": cantidad1,
-                            "modelTaller": modelTaller,
-                            "cant_defec_tfa": cant_defec_tfa,
-                            "cant_pend_tfa": cant_pend_tfa,
-                            "cant_rep_tfa": cant_rep_tfa,
-                            "cant_irrep_tfa": cant_irrep_tfa,
-                            "cant_defec_tb": cant_defec_tb,
-                            "cant_pend_tb": cant_pend_tb,
-                            "cant_rep_tb": cant_rep_tb,
-                            "cant_irrep_tb": cant_irrep_tb,
-                            "totalDefec": totalDefec,
-                            "totalPend": totalPend,
-                            "totalReparado": totalReparado,
-                            "totalIrrep": totalIrrep,
-                            "form": form,
-                        },
-                    )
-    else:
-        form = LoginForm()
-    return render(request, "Authentication/login.html", {"form": form})
-
-
-@login_required
-def loggedout(request):
-    logout(request)
-    return HttpResponseRedirect("/./")
-
-
 """@login_required
 def buscarservicio(request):
     error = False
@@ -338,81 +155,6 @@ def buscarservicio(request):
             "error": error,
         },
     )"""
-
-
-def reimprimir_orden(request, plantilla, ordenprimaria_id):
-    Orden = OrdenPrimaria.objects.filter(centro=request.user.trabajador.centro)
-    modelComercial = Orden.filter(confComercial=False)
-    cantidad = modelComercial.count()
-    modelTaller = Orden.filter(confComercial=True).filter(confTaller=False)
-    cantidad1 = modelTaller.count()
-    for model in Orden:
-        model = get_object_or_404(Orden, id=ordenprimaria_id)
-    return render(
-        request,
-        plantilla,
-        {
-            "cantidad": cantidad,
-            "modelComercial": modelComercial,
-            "cantidad1": cantidad1,
-            "modelTaller": modelTaller,
-            "model": model,
-        },
-    )
-
-
-class CrearOrden(BaseDatosMixin, PermissionRequiredMixin, CreateView):
-    model = OrdenPrimaria
-    form_class = PrimaryOrderForm
-    template_name = "Comercial/ordenprimaria_form.html"
-    success_url = reverse_lazy("pdf_orden")
-    permission_required = "Taller.add_ordenprimaria"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["defec"] = Defecto.objects.all()
-        context["mod"] = Modelo.objects.all()
-        context["prefijo"] = Prefijo.objects.all()
-        return context
-
-    """def dispatch(self, request, *args, **kwargs):
-        if request.method == "POST":
-            messages.add_message(
-                request, messages.INFO, "La orden fue creada con éxito"
-            )
-        return super(CrearOrden, self).dispatch(request, *args, **kwargs)"""
-
-    def form_valid(self, form):
-        d = datetime.datetime.now()
-        last_d = d.year
-        last_m = d.month
-        user = self.request.user
-        centro = user.trabajador.centro
-        estado = get_object_or_404(Estado, pk=1)
-        self.object = form.save(commit=False)
-        temp = 1
-        ordenp = OrdenPrimaria.objects.all()
-        ordenp.order_by("No_orden")
-        for orden in ordenp:
-            fe = orden.fecha_creacion
-            if fe.year == last_d and fe.month == last_m:
-                temp += 1
-            else:
-                temp = 1
-
-        self.object.No_orden = "%s%s%s" % (str(last_d), str(last_m), str(temp))
-        self.object.centro = centro
-        self.object.ordena = user.trabajador
-        self.object.fecha_creacion = datetime.datetime.now()
-        self.object.estado = estado
-        self.object.tecnologia = self.object.modelo.tecnologia
-        # self.object.codigo_sap=self.object.modelo.codigo_sap
-        # self.object.descripcion=self.object.modelo.descripcion
-        self.object = form.save()
-
-        # modelact=get_object_or_404(OrdenPrimaria, pk=self.object.pk)
-        return super(CrearOrden, self).form_valid(form)
-
 
 class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
     # modelprim = None
@@ -468,122 +210,6 @@ class RepararOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
         orden_hist.save()
         self.object = form.save()
         return super(RepararOrden, self).form_valid(form)
-
-
-class UpdateOrder(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    model = OrdenPrimaria
-    template_name = "Comercial/ordenprimaria_form.html"
-    success_url = reverse_lazy("list_updates")
-    permission_required = "Taller.add_ordenprimaria"
-    form_class = PrimaryOrderForm
-
-    """fields = [
-        "prefijo",
-        "servicio",
-        "modelo",
-        "defecto",
-        "serie",
-        "nombre_cliente_entrega",
-        "direccion_cliente_entrega",
-        "ci_cliente_entrega",
-        "contacto_telefono",
-        "propietario",
-        "folio_venta",
-        "fecha_venta",
-        "garantia",
-        "fecha_vencimiento_garantia",
-        "observaciones",
-    ]"""
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["defec"] = Defecto.objects.all()
-        context["mod"] = Modelo.objects.all()
-        context["prefijo"] = Prefijo.objects.all()
-        return context
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.method == "POST":
-            messages.add_message(
-                request, messages.INFO, "La orden fue actualizada con éxito"
-            )
-        return super(UpdateOrder, self).dispatch(request, *args, **kwargs)
-
-
-class DeleteOrder(BaseDatosMixin, PermissionRequiredMixin, DeleteView):
-    model = OrdenPrimaria
-    template_name = "Comercial/delete_order.html"
-    success_url = reverse_lazy("list_updates")
-    permission_required = "Taller.add_ordenprimaria"
-
-
-class CerrarOrden(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    model = OrdenPrimaria
-    success_url = reverse_lazy("ordenes_reparadas")
-    template_name = "Comercial/ordencerrada_form.html"
-    permission_required = "Taller.add_ordenprimaria"
-    form_class = CloseOrderForm
-
-    @method_decorator(login_required)
-    def dispatch(self, request, pk, *args, **kwargs):
-        if request.method == "POST":
-            messages.add_message(
-                request, messages.INFO, "La orden se ha cerrado con éxito"
-            )
-        return super(CerrarOrden, self).dispatch(request, pk, *args, **kwargs)
-
-    def form_valid(self, form):
-        user = self.request.user
-        if self.object.fecha_gestion == None:
-            self.object.fecha_gestion = datetime.datetime.now()
-        self.object = form.save(commit=False)
-        self.object.cerrada = True
-        now = timezone.now()
-        now = datetime.datetime.strftime(now, "%d/%m/%Y")
-        now = datetime.datetime.strptime(now, "%d/%m/%Y")
-        fechastr = datetime.datetime.strftime(self.object.fecha_gestion, "%d/%m/%Y")
-        fechaCalulo = datetime.datetime.strptime(fechastr, "%d/%m/%Y")
-        fecha = (now - fechaCalulo) / datetime.timedelta(days=1)
-        if fecha < 15:
-            self.object.garantia_reparacion = now + datetime.timedelta(days=30)
-        else:
-            self.object.garantia_reparacion = fecha_gestion + datetime.timedelta(
-                days=45
-            )
-
-        self.object.cierra = user.trabajador
-        self.object.fecha_cierre = datetime.datetime.now()
-        self.object = form.save()
-        return super(CerrarOrden, self).form_valid(form)
-
-
-class OrdenLlamada(BaseDatosMixin, PermissionRequiredMixin, UpdateView):
-    model = OrdenPrimaria
-    success_url = reverse_lazy("gestion_telefono")
-    template_name = "Comercial/ordenllamada_form.html"
-    permission_required = "Taller.add_ordenprimaria"
-    form_class = TalkForm
-
-    @method_decorator(login_required)
-    def dispatch(self, request, pk, *args, **kwargs):
-        if request.method == "POST":
-            messages.add_message(
-                request,
-                messages.INFO,
-                "Se ha confirmado la gestión de esta orden con el cliente",
-            )
-        return super(OrdenLlamada, self).dispatch(request, pk, *args, **kwargs)
-
-    def form_valid(self, form):
-        user = self.request.user
-        self.object = form.save(commit=False)
-        self.object.llama = user.trabajador
-        self.object.fecha_gestion = timezone.now()
-        self.object.garantia_reparacion = datetime.datetime.now() + datetime.timedelta(
-            days=15
-        )
-        self.object = form.save()
-        return super(OrdenLlamada, self).form_valid(form)
 
 
 class ChangePassword(PasswordChangeView):

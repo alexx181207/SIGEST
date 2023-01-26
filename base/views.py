@@ -5,9 +5,6 @@ from django.views.generic import ListView
 from Taller.models import OrdenPrimaria
 import datetime
 
-# Create your views here.
-
-
 def CalcularTiempo(fecha):
     fechaActual = datetime.datetime.now()
     fechaActual = datetime.datetime.strftime(fechaActual, "%d/%m/%Y")
